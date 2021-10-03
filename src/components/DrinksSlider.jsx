@@ -9,12 +9,10 @@ function DrinksSlider({ type, suggestedRecipes }) {
 
   if (type === 'meals') {
     sliderContent = suggestedRecipes.slice(0, maxIndex);
-    console.log(sliderContent);
   }
 
   if (type === 'drinks') {
     sliderContent = suggestedRecipes.slice(0, maxIndex);
-    console.log(sliderContent);
   }
 
   const renderSlider = () => (

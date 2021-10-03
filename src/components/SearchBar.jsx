@@ -10,12 +10,13 @@ function SearchBar({ pageTitle, setSearchBarActive }) {
   const { setMeals, setDrinks } = useContext(RecipesContext);
   const [inputValue, setInputValue] = useState('');
   const [radioValue, setRadioValue] = useState('');
+  const maxIndex = 12;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (pageTitle === 'Comidas') {
       const data = await fetchMeals(inputValue, radioValue);
-      setMeals(data);
+      setMeals(data && data.slice(0, maxIndex));
       if (!data) {
         return global.alert('Sinto muito, não encontramos nenhuma '
         + 'receita para esses filtros.');
@@ -26,7 +27,7 @@ function SearchBar({ pageTitle, setSearchBarActive }) {
     }
     if (pageTitle === 'Bebidas') {
       const data = await fetchDrinks(inputValue, radioValue);
-      setDrinks(data);
+      setDrinks(data && data.slice(0, maxIndex));
       if (!data) {
         return global.alert('Sinto muito, não encontramos nenhuma '
         + 'receita para esses filtros.');

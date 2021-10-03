@@ -9,10 +9,11 @@ import './css/Comidas.css';
 
 function Comidas() {
   const { meals, setMeals } = useContext(RecipesContext);
+  const maxNumber = 12;
 
   useEffect(() => {
     fetchInitialMeals()
-      .then((data) => setMeals([...data]));
+      .then((data) => setMeals(data.slice(0, maxNumber)));
   }, [setMeals]);
 
   const renderMeals = () => (
