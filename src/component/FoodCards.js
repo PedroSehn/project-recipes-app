@@ -10,8 +10,11 @@ function FoodCards() {
     <div>
       {foods.map((food, index) => (
         index < DOZE ? (
-          <Link to={ `/comidas/${food.idMeal}` }>
-            <div data-testid={ `${index}-recipe-card` } key={ food.idMeal }>
+          <Link
+            to={ `/comidas/${food.idMeal}` }
+            key={ food.idMeal }
+          >
+            <div data-testid={ `${index}-recipe-card` }>
               <div>
                 <img
                   data-testid={ `${index}-card-img` }
