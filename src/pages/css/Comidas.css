@@ -1,0 +1,119 @@
+.header-container {
+  align-items: center;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 46px;
+  padding: 8px 0;
+}
+
+.header-container h1 {
+  font-size: 25px;
+  font-style: italic;
+  margin: 0;
+}
+
+.header-container img {
+  height: 30px;
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.search-btn {
+  background-color: transparent;
+  border: none;
+}
+
+.serch-container {
+  display: block;
+}
+
+.search-input-wrapper {
+  margin: 5px 0;
+  text-align: center;
+}
+
+
+.search-input-wrapper input {
+  border: none;
+  border-radius: 20px;
+  padding: 5px 15px;
+}
+
+.search-btns-wrapper input {
+  margin: 5px;
+  padding: 5px;
+}
+
+.search-btns-wrapper button {
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+  display: block;
+  height: 30px;
+  margin: auto;
+  width: 100px;
+}
+
+.recipes-cards-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.recipe-card {
+  align-items: center;
+  background-color: whitesmoke;
+  border: 1px solid whitesmoke;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin: 15px;
+  overflow: hidden;
+  padding: 0 15px;
+  width: 150px;
+}
+
+.recipe-card img {
+  height: 150px;
+  width: 150px;
+}
+
+.recipe-card-title-wrapper {
+  align-items: center;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.recipe-card span {
+  margin: 5px 0;
+  text-align: center;
+  top: 150px;
+}
+
+.filter-recipes-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-recipes-btns button {
+  background: var(--primary-color);
+  border: 5px;
+  border-radius: 5px;
+  color: white;
+  font-weight: 800;
+  height: 46px;
+  margin: 5px;
+  padding: 15px;
+}

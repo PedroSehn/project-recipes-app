@@ -12,6 +12,7 @@ function Header({ pageTitle, haveHeader }) {
     if (!haveHeader) return;
     return (
       <button
+        className="search-btn"
         type="button"
         onClick={ () => setSearchBarActive(!searchBarActive) }
       >
@@ -25,8 +26,8 @@ function Header({ pageTitle, haveHeader }) {
   };
 
   return (
-    <div>
-      <div style={ { display: 'flex ' } }>
+    <div className="header-container">
+      <div className="header-wrapper">
         <Link to="/perfil">
           <img
             data-testid="profile-top-btn"
@@ -37,8 +38,11 @@ function Header({ pageTitle, haveHeader }) {
         <h1 data-testid="page-title">{ pageTitle }</h1>
         { searchTopBtn() }
       </div>
-      <div style={ { display: 'block' } }>
-        { searchBarActive ? <SearchBar pageTitle={ pageTitle } /> : null}
+      <div className="search-container">
+        { searchBarActive ? <SearchBar
+          pageTitle={ pageTitle }
+          setSearchBarActive={ setSearchBarActive }
+        /> : null}
       </div>
     </div>
   );

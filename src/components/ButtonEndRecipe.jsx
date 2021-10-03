@@ -10,6 +10,7 @@ export default function ButtonEndRecipe({ disabled }) {
   return (
     <div>
       <button
+        className="finish-recipe-btn"
         onClick={ HandleClick }
         type="button"
         disabled={ disabled }

@@ -14,7 +14,7 @@ function Perfil() {
   }
 
   return (
-    <div>
+    <div className="main-container">
       <Header pageTitle="Perfil" haveHeader={ false } />
       <div>
         <Link to="/perfil">

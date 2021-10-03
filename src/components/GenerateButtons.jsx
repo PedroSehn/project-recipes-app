@@ -6,6 +6,7 @@ import { fetchDrinkByCategory, fetchInitialDrinks } from '../services/fetchDrink
 const NUMBER_OF_BUTTONS = 5;
 
 function GenerateButtons(filterButtons, type) {
+  const maxNumber = 12;
   const {
     setMeals,
     setDrinks,
@@ -17,29 +18,29 @@ function GenerateButtons(filterButtons, type) {
     if ((currentCategory === category) || btnType === 'all') {
       fetchInitialMeals()
         .then((data) => {
-          setMeals([...data]);
+          setMeals(data.slice(0, maxNumber));
           setCurrentCategory('');
         });
       fetchInitialDrinks()
         .then((data) => {
-          setDrinks([...data]);
+          setDrinks(data.slice(0, maxNumber));
           setCurrentCategory('');
         });
       return;
     }
 
     if (btnType === 'meal') {
-      fetchMealByCategory(category).then((data) => setMeals([...data]));
+      fetchMealByCategory(category).then((data) => setMeals(data.slice(0, maxNumber)));
       setCurrentCategory(category);
     } else {
-      fetchDrinkByCategory(category).then((data) => setDrinks([...data]));
+      fetchDrinkByCategory(category).then((data) => setDrinks(data.slice(0, maxNumber)));
       setCurrentCategory(category);
     }
   }
 
   const categories = filterButtons.map(({ strCategory }) => strCategory);
   return (
-    <div>
+    <div className="filter-recipes-btns">
       <button
         type="button"
         data-testid="All-category-filter"

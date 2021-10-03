@@ -1,29 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './css/DrinksSlider.css';
 
 function DrinksSlider({ type, suggestedRecipes }) {
-  const sliderContent = [];
+  let sliderContent = [];
   const maxIndex = 6;
 
-  if (suggestedRecipes.length && type === 'meals') {
-    for (let i = 0; i < maxIndex; i += 1) {
-      sliderContent.push({ thumb: suggestedRecipes[i].strDrinkThumb,
-        name: suggestedRecipes[i].strDrink });
-    }
-  } else if (suggestedRecipes.length && type === 'drinks') {
-    for (let i = 0; i < maxIndex; i += 1) {
-      sliderContent.push({ thumb: suggestedRecipes[i].strMealThumb,
-        name: suggestedRecipes[i].strMeal });
-    }
+  if (!suggestedRecipes.length) return <p>loading....</p>;
+
+  if (type === 'meals') {
+    sliderContent = suggestedRecipes.slice(0, maxIndex);
+  }
+
+  if (type === 'drinks') {
+    sliderContent = suggestedRecipes.slice(0, maxIndex);
   }
 
   const renderSlider = () => (
     <div className="slider-container">
-      { sliderContent.map(({ thumb, name }, index) => (
+      { sliderContent.map((recipe, index) => (
         <div key={ index } data-testid={ `${index}-recomendation-card` }>
-          <img src={ thumb } alt="thumbnail recipe" style={ { height: '151px' } } />
-          <h4 data-testid={ `${index}-recomendation-title` }>{ name }</h4>
+          <img
+            src={ recipe.strMealThumb || recipe.strDrinkThumb }
+            alt="thumbnail recipe"
+            style={ { height: '151px' } }
+          />
+          <h4
+            data-testid={ `${index}-recomendation-title` }
+          >
+            { recipe.strDrink || recipe.strMeal}
+          </h4>
         </div>
       ))}
     </div>
@@ -39,6 +44,6 @@ function DrinksSlider({ type, suggestedRecipes }) {
 export default DrinksSlider;
 
 DrinksSlider.propTypes = {
-  suggestedRecipes: PropTypes.arrayOf(PropTypes.any),
   type: PropTypes.string,
+  suggestedRecipes: PropTypes.arrayOf(PropTypes.any),
 }.isRequired;

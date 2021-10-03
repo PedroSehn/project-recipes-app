@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import logo from '../images/logo.svg';
+import './css/Login.css';
 
 export default function Login({ history }) {
   const [email, setEmail] = useState('');
@@ -25,7 +27,8 @@ export default function Login({ history }) {
   };
 
   return (
-    <div>
+    <div className="container login-container">
+      <img className="logo" src={ logo } alt="logotipo do App DevSerBom" />
       <input
         className="input-form"
         required
@@ -46,6 +49,7 @@ export default function Login({ history }) {
         placeholder="senha"
       />
       <button
+        className="login-button"
         data-testid="login-submit-btn"
         type="submit"
         value={ password }

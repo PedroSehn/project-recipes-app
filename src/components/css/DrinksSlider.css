@@ -1,7 +1,0 @@
-.slider-container {
-  display: flex;
-  flex-wrap: nowrap;
-  margin-bottom: 50px;
-  overflow: auto;
-  width: 300px;
-}

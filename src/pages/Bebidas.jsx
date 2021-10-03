@@ -8,12 +8,11 @@ import FilteringDrinkButtons from '../components/FilteringDrinkButtons';
 
 function Bebidas() {
   const { drinks, setDrinks } = useContext(RecipesContext);
+  const maxNumber = 12;
 
   useEffect(() => {
-    fetchInitialDrinks()
-      .then((data) => setDrinks([...data]));
+    fetchInitialDrinks().then((data) => setDrinks(data.slice(0, maxNumber)));
   }, [setDrinks]);
-
   const renderDrinks = () => (
     drinks.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
       <div key={ strDrink }>
@@ -29,12 +28,11 @@ function Bebidas() {
   );
 
   return (
-    <div>
+    <div className="main-container">
       <Header pageTitle="Bebidas" haveHeader="active" />
-      <div>Bebidas</div>
-
-      { drinks && renderDrinks() }
-
+      <div className="recipes-cards-wrapper">
+        { drinks && renderDrinks() }
+      </div>
       <Footer />
       <FilteringDrinkButtons />
     </div>

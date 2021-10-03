@@ -36,30 +36,32 @@ function ExplorarComidas() {
   };
 
   return (
-    <div>
+    <div className="main-container">
       <Header pageTitle={ getPageTitle() } haveHeader={ false } />
-      <button
-        onClick={ handleClick }
-        data-testid="explore-by-ingredient"
-        type="button"
-      >
-        Por Ingredientes
-      </button>
-      { pathname === '/explorar/comidas' && (
+      <div className="explore-container">
         <button
           onClick={ handleClick }
+          data-testid="explore-by-ingredient"
           type="button"
-          data-testid="explore-by-area"
         >
-          Por Local de Origem
-        </button>)}
-      <button
-        data-testid="explore-surprise"
-        type="button"
-        onClick={ handleClick }
-      >
-        Me Surpreenda!
-      </button>
+          Por Ingredientes
+        </button>
+        { pathname === '/explorar/comidas' && (
+          <button
+            onClick={ handleClick }
+            type="button"
+            data-testid="explore-by-area"
+          >
+            Por Local de Origem
+          </button>)}
+        <button
+          data-testid="explore-surprise"
+          type="button"
+          onClick={ handleClick }
+        >
+          Me Surpreenda!
+        </button>
+      </div>
       <Footer />
     </div>
   );

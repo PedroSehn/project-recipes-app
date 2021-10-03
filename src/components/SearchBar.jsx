@@ -5,44 +5,52 @@ import RecipesContext from '../context/RecipesContext';
 import fetchDrinks from '../services/fetchDrinks';
 import fetchMeals from '../services/fetchMeals';
 
-function SearchBar({ pageTitle }) {
+function SearchBar({ pageTitle, setSearchBarActive }) {
   const history = useHistory();
   const { setMeals, setDrinks } = useContext(RecipesContext);
   const [inputValue, setInputValue] = useState('');
   const [radioValue, setRadioValue] = useState('');
+  const maxIndex = 12;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (pageTitle === 'Comidas') {
       const data = await fetchMeals(inputValue, radioValue);
-      setMeals(data);
+      setMeals(data && data.slice(0, maxIndex));
       if (!data) {
         return global.alert('Sinto muito, não encontramos nenhuma '
         + 'receita para esses filtros.');
       }
       if (data.length === 1) history.push(`comidas/${data[0].idMeal}`);
+      setSearchBarActive(false);
       return;
     }
     if (pageTitle === 'Bebidas') {
       const data = await fetchDrinks(inputValue, radioValue);
-      setDrinks(data);
+      setDrinks(data && data.slice(0, maxIndex));
       if (!data) {
         return global.alert('Sinto muito, não encontramos nenhuma '
         + 'receita para esses filtros.');
       }
       if (data.length === 1) history.push(`bebidas/${data[0].idDrink}`);
+      setSearchBarActive(false);
     }
   };
 
   return (
     <div>
-      <form onSubmit={ handleSubmit }>
-        <input
-          data-testid="search-input"
-          onChange={ ({ target }) => setInputValue(target.value) }
-          value={ inputValue }
-        />
-        <div onChange={ ({ target }) => setRadioValue(target.value) }>
+      <form className="search-from" onSubmit={ handleSubmit }>
+        <div className="search-input-wrapper">
+          <input
+            data-testid="search-input"
+            onChange={ ({ target }) => setInputValue(target.value) }
+            value={ inputValue }
+          />
+        </div>
+        <div
+          className="search-btns-wrapper"
+          onChange={ ({ target }) => setRadioValue(target.value) }
+        >
           <label htmlFor="ingredient-search">
             <input
               data-testid="ingredient-search-radio"
