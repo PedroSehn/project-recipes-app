@@ -5,15 +5,13 @@ import RecipeCard from '../components/RecipeCard';
 import Footer from '../components/Footer';
 import { fetchInitialMeals } from '../services/fetchMeals';
 import FilteringMealsButtons from '../components/FilteringMealsButtons';
-import './css/Comidas.css';
 
 function Comidas() {
   const { meals, setMeals } = useContext(RecipesContext);
-  const maxNumber = 12;
 
   useEffect(() => {
     fetchInitialMeals()
-      .then((data) => setMeals(data.slice(0, maxNumber)));
+      .then((data) => setMeals([...data]));
   }, [setMeals]);
 
   const renderMeals = () => (
@@ -31,13 +29,12 @@ function Comidas() {
   );
 
   return (
-    <div className="main-container">
+    <div>
       <Header pageTitle="Comidas" haveHeader="active" />
-      <div className="recipes-cards-wrapper">
-        { meals && renderMeals() }
-      </div>
-      <FilteringMealsButtons />
+      <div>comidas</div>
+      { meals && renderMeals() }
       <Footer />
+      <FilteringMealsButtons />
     </div>
   );
 }

@@ -5,8 +5,9 @@ function FrameVideo({ type, recipe }) {
   if (type === 'meals' && recipe) {
     return (
       <iframe
-        className="video"
         data-testid="video"
+        width="320"
+        height="180"
         title="video"
         src={ recipe.strYoutube.replace('watch?v=', 'embed/') }
         frameBorder="0"

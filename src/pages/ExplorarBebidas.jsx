@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 
 function ExplorarBebidas() {
   return (
-    <div className="main-container">
+    <div>
       <Header pageTitle="Explorar Bebidas" haveHeader={ false } />
       <div>Explorar Bebidas</div>
       <Footer />

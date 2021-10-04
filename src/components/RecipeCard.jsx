@@ -8,20 +8,23 @@ function RecipeCard({ id, recipeType, name, thumb, index }) {
     return `bebidas/${id}`;
   };
 
-  return (
-    <Link to={ getRouteLink() }>
-      <div className="recipe-card" data-testid={ `${index}-recipe-card` }>
-        <img
-          data-testid={ `${index}-card-img` }
-          src={ thumb }
-          alt={ `imagem ${name}` }
-        />
-        <div className="recipe-card-title-wrapper">
+  const maxIndex = 12;
+  if (index < maxIndex) {
+    return (
+      <Link to={ getRouteLink() }>
+        <div data-testid={ `${index}-recipe-card` }>
           <span data-testid={ `${index}-card-name` }>{ name }</span>
+          <img
+            data-testid={ `${index}-card-img` }
+            src={ thumb }
+            alt={ `imagem ${name}` }
+            style={ { height: '100px' } }
+          />
         </div>
-      </div>
-    </Link>
-  );
+      </Link>
+    );
+  }
+  return null;
 }
 
 export default RecipeCard;

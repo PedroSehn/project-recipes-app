@@ -4,9 +4,9 @@ import getIngredients from '../services/getIngredients';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteBtn from '../components/FavoriteBtn';
 import RecipeImage from '../components/RecipeImage';
+import './css/MealDetails.css';
 import CheckList from '../components/CheckList';
 import ButtonEndRecipe from '../components/ButtonEndRecipe';
-import './css/ReceitasInProgress.css';
 
 const copy = require('clipboard-copy');
 
@@ -51,62 +51,48 @@ function ReceitasInProgress({ match: { params: { id } }, type }) {
   return (
     <div>
       { selectedRecipe.map((recipe, i) => (
-        <div className="details-container" key={ i }>
+        <div key={ i }>
           <RecipeImage type={ type } recipe={ recipe } />
-          <div className="details-buttons-and-titles-container">
-            <div>
-              <h2
-                data-testid="recipe-title"
-              >
-                { type === 'meals' ? recipe.strMeal : recipe.strDrink }
-              </h2>
-              <h4
-                data-testid="recipe-category"
-              >
-                { type === 'meals' ? recipe.strCategory : recipe.strAlcoholic}
-              </h4>
-            </div>
-            <div className="details-buttons-container">
-              <button
-                data-testid="share-btn"
-                type="button"
-                onClick={ handleShareClick }
-              >
-                <img src={ shareIcon } alt="icone de compartilhar" />
-              </button>
-              { modal }
-              <FavoriteBtn
+          <h2
+            data-testid="recipe-title"
+          >
+            { type === 'meals' ? recipe.strMeal : recipe.strDrink }
+          </h2>
+          <div>
+            <button data-testid="share-btn" type="button" onClick={ handleShareClick }>
+              <img src={ shareIcon } alt="icone de compartilhar" />
+            </button>
+            { modal }
+            <FavoriteBtn
+              id={ id }
+              type={ type }
+              favorited={ favorited }
+              selectedRecipe={ selectedRecipe }
+              setFavorited={ setFavorited }
+            />
+          </div>
+          <h4
+            data-testid="recipe-category"
+          >
+            { type === 'meals' ? recipe.strCategory : recipe.strAlcoholic}
+          </h4>
+
+          <form>
+            { getIngredients(selectedRecipe).map((ingredient, index, array) => (
+
+              <CheckList
+                key={ ingredient }
+                qtn={ array.length }
+                set={ setDisableButton }
                 id={ id }
                 type={ type }
-                favorited={ favorited }
-                selectedRecipe={ selectedRecipe }
-                setFavorited={ setFavorited }
+                name={ ingredient }
+                index={ index }
               />
-            </div>
-          </div>
 
-          <form className="used-ingredients-container">
-            <div className="check-itens-container">
-
-              { getIngredients(selectedRecipe).map((ingredient, index, array) => (
-
-                <CheckList
-                  key={ ingredient }
-                  qtn={ array.length }
-                  set={ setDisableButton }
-                  id={ id }
-                  type={ type }
-                  name={ ingredient }
-                  index={ index }
-                />
-
-              ))}
-            </div>
+            ))}
           </form>
-          <div className="detail-instructions-container">
-            <h4>Instruções</h4>
-            <p data-testid="instructions">{ recipe.strInstructions }</p>
-          </div>
+          <p data-testid="instructions">{ recipe.strInstructions }</p>
           <ButtonEndRecipe disabled={ DisableButton } setDisable={ setDisableButton } />
         </div>
       ))}

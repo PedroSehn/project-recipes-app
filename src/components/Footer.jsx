@@ -9,27 +9,33 @@ import './css/FooterStyle.css';
 export default function Footer() {
   return (
     <div data-testid="footer" className="footer-test">
-      <Link to="/bebidas">
-        <img
-          data-testid="drinks-bottom-btn"
-          src={ drinkIcon }
-          alt="botão para entrar na página de perfil"
-        />
-      </Link>
-      <Link to="/explorar">
-        <img
-          data-testid="explore-bottom-btn"
-          src={ exploreIcon }
-          alt="botão para entrar na página de perfil"
-        />
-      </Link>
-      <Link to="/comidas">
-        <img
-          data-testid="food-bottom-btn"
-          src={ foodIcon }
-          alt="botão para entrar na página de perfil"
-        />
-      </Link>
+      <div>
+        <Link to="/bebidas">
+          <img
+            data-testid="drinks-bottom-btn"
+            src={ drinkIcon }
+            alt="botão para entrar na página de perfil"
+          />
+        </Link>
+      </div>
+      <div>
+        <Link to="/explorar">
+          <img
+            data-testid="explore-bottom-btn"
+            src={ exploreIcon }
+            alt="botão para entrar na página de perfil"
+          />
+        </Link>
+      </div>
+      <div>
+        <Link to="/comidas">
+          <img
+            data-testid="food-bottom-btn"
+            src={ foodIcon }
+            alt="botão para entrar na página de perfil"
+          />
+        </Link>
+      </div>
     </div>
   );
 }

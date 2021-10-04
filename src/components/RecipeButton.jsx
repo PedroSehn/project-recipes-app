@@ -19,11 +19,9 @@ function RecipeButton({ type, id }) {
   storageData = JSON.parse(storageData);
 
   let buttonText = initialButtonText;
-
-  if (storageData && storageData.meals && Object.keys(storageData.meals).includes(id)) {
+  if (storageData && storageData.meals && Object.keys(storageData[type]).includes(id)) {
     buttonText = 'Continuar Receita';
   }
-
   if (storageData && storageData.cocktails
     && Object.keys(storageData.cocktails).includes(id)) {
     buttonText = 'Continuar Receita';

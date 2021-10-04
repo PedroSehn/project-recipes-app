@@ -1,14 +1,5 @@
 .footer-test {
-  background: var(--primary-color);
   bottom: 0;
-  display: flex;
-  gap: 30px;
-  justify-content: space-around;
-  margin-top: 50px;
-  padding: 10px;
+  margin-left: 320px;
   position: fixed;
-
-  /* visibility: hidden; */
-  width: 100vw;
 }
-

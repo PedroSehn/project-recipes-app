@@ -17,8 +17,6 @@ import ReceitasFavoritas from './pages/ReceitasFavoritas';
 import RecipeDetail from './pages/RecipeDetail';
 import ReceitasInProgress from './pages/ReceitasInProgress';
 
-// nova branch para driblar o crash do evaluator!!
-
 function App() {
   return (
     <Provider>

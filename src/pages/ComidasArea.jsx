@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 
 function ComidasArea() {
   return (
-    <div className="main-container">
+    <div>
       <Header pageTitle="Explorar Origem" haveHeader="active" />
       <div>Exporar Origem</div>
       <Footer />
