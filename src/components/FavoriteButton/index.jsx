@@ -1,36 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useRecipes } from '../../context';
 
-function FavoriteButton({ colorBeforeClick, colorAfterClick, recipe, type }) {
+function FavoriteButton({
+  colorBeforeClick,
+  colorAfterClick,
+  recipe,
+  type,
+}) {
+  const { handleFavorite } = useRecipes();
+
   return (
     <button
       type="button"
       onClick={ () => {
-        document.querySelector('.favIcon')
-          .setAttribute('src', `${colorAfterClick}`);
-        if (type === 'meal') {
-          const favRecipe = [{
-            id: recipe.idMeal,
-            type: 'comida',
-            area: recipe.strArea,
-            category: recipe.strCategory,
-            alcoholicOrNot: '',
-            name: recipe.strMeal,
-            image: recipe.strMealThumb,
-          }];
-          localStorage.setItem('favoriteRecipes', JSON.stringify(favRecipe));
-        } else {
-          const favRecipe = [{
-            id: recipe.idDrink,
-            type: 'bebida',
-            area: '',
-            category: recipe.strCategory,
-            alcoholicOrNot: recipe.strAlcoholic,
-            name: recipe.strDrink,
-            image: recipe.strDrinkThumb,
-          }];
-          localStorage.setItem('favoriteRecipes', JSON.stringify(favRecipe));
-        }
+        handleFavorite(type, recipe, colorAfterClick);
       } }
     >
       <img

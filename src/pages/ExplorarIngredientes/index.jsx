@@ -3,13 +3,13 @@ import { Link, useParams, Redirect } from 'react-router-dom';
 
 import './styles.css';
 
-import { useRecipes, useSearch } from '../../context';
+import { useExplore, useSearch } from '../../context';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 function ExplorarIngredientes() {
   const { type } = useParams();
-  const { ingredientsList, fecthIngredients } = useRecipes();
+  const { ingredientsList, fecthIngredients } = useExplore();
   const { handleSearch } = useSearch();
 
   useEffect(() => {

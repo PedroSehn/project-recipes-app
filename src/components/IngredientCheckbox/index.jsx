@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 function IngredientCheckbox({
@@ -6,7 +6,36 @@ function IngredientCheckbox({
   index,
   ingredientsChecked,
   setIngredientsChecked,
-  checkAllCheckbox }) {
+  setAllChecked,
+}) {
+  // Referência para implementar lógica de checar as checkbox: https://stackoverflow.com/questions/5541387/check-if-all-checkboxes-are-selected
+  const checkAllCheckbox = () => {
+    const allCheckbox = document.querySelectorAll('.ingredient-checkbox');
+    const allCheckboxChecked = document.querySelectorAll('.ingredient-checkbox:checked');
+    if (allCheckboxChecked.length === allCheckbox.length) {
+      setAllChecked(true);
+    } else {
+      setAllChecked(false);
+    }
+  };
+
+  const checkStyle = () => {
+    const getCheckedFromLocalStorage = localStorage.getItem('checkedIngredients');
+    if (getCheckedFromLocalStorage && Object.values(ingredientsChecked)) {
+      const checkboxStatus = Object
+        .values(JSON.parse(getCheckedFromLocalStorage));
+      const ingredientsCheckedStatus = Object.values(ingredientsChecked);
+      if (checkboxStatus[index] || ingredientsCheckedStatus[index]) {
+        return { textDecoration: 'line-through' };
+      }
+      return { textDecoration: 'none' };
+    }
+  };
+
+  useEffect(() => {
+    checkAllCheckbox();
+  }, []);
+
   const checkIngredient = (target) => {
     if (!target.checked) {
       setIngredientsChecked({
@@ -27,7 +56,7 @@ function IngredientCheckbox({
 
   return (
     <div data-testid={ `${index}-ingredient-step` }>
-      <label htmlFor={ `${index}-ingredient-step` }>
+      <label htmlFor={ `${index}-ingredient-step` } style={ checkStyle() }>
         <input
           className="ingredient-checkbox"
           id={ `${index}-ingredient-step` }
@@ -48,7 +77,7 @@ IngredientCheckbox.propTypes = {
   index: PropTypes.number.isRequired,
   ingredientsChecked: PropTypes.objectOf(PropTypes.any).isRequired,
   setIngredientsChecked: PropTypes.func.isRequired,
-  checkAllCheckbox: PropTypes.func.isRequired,
+  setAllChecked: PropTypes.func.isRequired,
 };
 
 export default IngredientCheckbox;

@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useHistory, useParams, Redirect, Link } from 'react-router-dom';
 
-import { useRecipes } from '../../context';
+import { useExplore } from '../../context';
 
 import './styles.css';
 
@@ -11,7 +11,7 @@ import Footer from '../../components/Footer';
 function ExplorarComidasOuBebidas() {
   const { type } = useParams();
   const { push } = useHistory();
-  const { getRandomRecipe } = useRecipes();
+  const { getRandomRecipe } = useExplore();
   const [loading, setLoading] = useState(false);
 
   const handleSurprise = useCallback(async () => {

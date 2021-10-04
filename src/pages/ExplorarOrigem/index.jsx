@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './styles.css';
 
-import { useRecipes } from '../../context';
+import { useExplore } from '../../context';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
@@ -12,7 +12,7 @@ function ExplorarOrigem() {
     selectedArea,
     setSelectedArea,
     areas,
-    mealsByArea } = useRecipes();
+    mealsByArea } = useExplore();
 
   const renderSelect = () => (
     <label htmlFor="area">

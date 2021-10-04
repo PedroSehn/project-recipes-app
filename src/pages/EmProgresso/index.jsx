@@ -3,14 +3,19 @@ import { useLocation, useParams } from 'react-router';
 
 import FavoriteButton from '../../components/FavoriteButton';
 import ShareButton from '../../components/ShareButton';
+import FinishRecipeButton from '../../components/FinishRecipeButton';
+import IngredientCheckbox from '../../components/IngredientCheckbox';
+import RecipeCategory from '../../components/RecipeCategory';
+import VideoPlayer from '../../components/VideoPlayer';
 
+import { useRecipes } from '../../context';
 import { useDetails } from '../../context/DetailsContext';
 
 import blackHeart from '../../images/blackHeartIcon.svg';
 import whiteHeart from '../../images/whiteHeartIcon.svg';
 import shareIcon from '../../images/shareIcon.svg';
-import FinishRecipeButton from '../../components/FinishRecipeButton';
-import IngredientCheckbox from '../../components/IngredientCheckbox';
+
+import './styles.css';
 
 function EmProgresso() {
   const [isCopied, setIsCopied] = useState(false);
@@ -21,10 +26,28 @@ function EmProgresso() {
   const { id } = useParams();
 
   const {
+    favoriteRecipes,
+    handleFinished,
+  } = useRecipes();
+
+  const {
     item,
     ingredients,
     fetchRecipe,
   } = useDetails();
+
+  useEffect(() => {
+    const handleCheck = () => {
+      const getChecksFromLocalStorage = (localStorage.getItem('checkedIngredients'));
+      if (getChecksFromLocalStorage) {
+        setIngredientsChecked(
+          JSON.parse(localStorage.getItem('checkedIngredients')),
+        );
+      }
+    };
+
+    handleCheck();
+  }, []);
 
   useEffect(() => {
     fetchRecipe(pathname, id);
@@ -33,32 +56,18 @@ function EmProgresso() {
   }, [pathname, id, fetchRecipe]);
 
   useEffect(() => {
-    const handleCheck = () => setIngredientsChecked(JSON
-      .parse(localStorage.getItem('checkedIngredients')));
-    handleCheck();
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('checkedIngredients', JSON.stringify({ ...ingredientsChecked }));
+    if (Object.keys(ingredientsChecked).length > 0) {
+      localStorage
+        .setItem('checkedIngredients', JSON.stringify({ ...ingredientsChecked }));
+    }
   }, [ingredientsChecked]);
 
   const handleCopy = (bool) => {
     setIsCopied(bool);
   };
 
-  // Referência para implementar lógica de checar as checkbox: https://stackoverflow.com/questions/5541387/check-if-all-checkboxes-are-selected
-  const checkAllCheckbox = () => {
-    const allCheckbox = document.querySelectorAll('.ingredient-checkbox');
-    const allCheckboxChecked = document.querySelectorAll('.ingredient-checkbox:checked');
-    if (allCheckboxChecked.length === allCheckbox.length) {
-      setAllChecked(true);
-    } else {
-      setAllChecked(false);
-    }
-  };
-
   const renderIngredients = () => (
-    <form>
+    <form className="ingredients-checkbox-list">
       { ingredients.map((ingredient, index) => (
         <IngredientCheckbox
           key={ index }
@@ -66,15 +75,16 @@ function EmProgresso() {
           index={ index }
           ingredientsChecked={ ingredientsChecked }
           setIngredientsChecked={ setIngredientsChecked }
-          checkAllCheckbox={ checkAllCheckbox }
+          setAllChecked={ setAllChecked }
         />
       ))}
     </form>
   );
 
-  const checkFavorites = (recipe, type) => {
-    const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favorites) {
+  const checkFavorites = (recipe, type, property) => {
+    const checkIfIsFavorite = favoriteRecipes
+      .some((fav) => fav.id === recipe[`id${property}`]);
+    if (checkIfIsFavorite) {
       return (
         <FavoriteButton
           colorBeforeClick={ blackHeart }
@@ -83,8 +93,7 @@ function EmProgresso() {
           type={ type }
         />
       );
-    }
-    return (
+    } return (
       <FavoriteButton
         colorBeforeClick={ whiteHeart }
         colorAfterClick={ blackHeart }
@@ -98,37 +107,48 @@ function EmProgresso() {
     if (!item[type]) {
       return <span>Carregando...</span>;
     } return (
-      <main>
+      <main className="inprogress-main-container">
         <img
+          className="recipe-img"
           data-testid="recipe-photo"
           src={ item[type][0][`str${property}Thumb`] }
           alt={ item[type][0][`str${property}`] }
           height="300px"
           width="300px"
         />
-        <h1 data-testid="recipe-title">{ item[type][0][`str${property}`] }</h1>
-        <ShareButton
-          path={ path }
-          id={ item[type][0][`id${property}`] }
-          icon={ shareIcon }
-          handleCopy={ handleCopy }
+        <h1
+          className="recipe-title"
+          data-testid="recipe-title"
+        >
+          { item[type][0][`str${property}`] }
+        </h1>
+        <RecipeCategory item={ item } type={ type } />
+        <section className="btns-section">
+          <ShareButton
+            path={ path }
+            id={ item[type][0][`id${property}`] }
+            icon={ shareIcon }
+            handleCopy={ handleCopy }
+          />
+          {checkFavorites(item[type][0], type, property)}
+          {isCopied && <p>Link copiado!</p> }
+        </section>
+        <section className="ingredients-section">
+          <h3>Ingredients</h3>
+          {renderIngredients()}
+        </section>
+        <section className="recipe-instructions">
+          <h3>Instructions</h3>
+          <p data-testid="instructions">{item[type][0].strInstructions}</p>
+        </section>
+        {type === 'meal'
+        && <VideoPlayer item={ item } type={ type } property={ property } />}
+        <FinishRecipeButton
+          enableBtn={ !allChecked }
+          handleFinished={ handleFinished }
+          recipe={ item[type][0] }
+          type={ type }
         />
-        {checkFavorites(item[type][0], type)}
-        {isCopied && <p>Link copiado!</p> }
-        <h2 data-testid="recipe-category">
-          { item[type][0].strAlcoholic
-            ? item[type][0].strAlcoholic : item[type][0].strCategory }
-        </h2>
-        {renderIngredients()}
-        <p data-testid="instructions">{item[type][0].strInstructions}</p>
-        {item[type][0].strYoutube
-        && <iframe
-          data-testid="video"
-          src={ item[type][0].strYoutube }
-          title={ item[type][0][`str${property}`] }
-          frameBorder="0"
-        />}
-        <FinishRecipeButton enableBtn={ !allChecked } />
       </main>
     );
   };

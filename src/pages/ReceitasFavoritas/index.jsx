@@ -1,25 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
+import { useRecipes } from '../../context';
+
 import Header from '../../components/Header';
-import shareIcon from '../../images/shareIcon.svg';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import Button from './Button';
 
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeart from '../../images/whiteHeartIcon.svg';
+import blackHeart from '../../images/blackHeartIcon.svg';
+
 function FavoriteRecipes({ history }) {
-  // objeto
-  const [favorite, setFavorite] = useState([]);
   // filtro
   const [food, setFood] = useState(false);
   const [drink, setDrink] = useState(false);
   // copia
   const [url, setUrl] = useState(false);
 
-  useEffect(() => {
-    setFavorite(JSON.parse(localStorage.getItem('favoriteRecipes')));
-  }, []);
-  useEffect(() => {
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favorite));
-  }, [favorite]);
+  const { favoriteRecipes, handleFavorite } = useRecipes();
+
+  const checkFavorites = (obj, index, type) => {
+    const checkIfIsFavorite = favoriteRecipes
+      .some((fav) => fav.id === obj.id);
+    if (checkIfIsFavorite) {
+      return (
+        <button
+          key={ index }
+          type="button"
+          onClick={ () => handleFavorite(type, obj, whiteHeart) }
+        >
+          <img
+            className="favIcon"
+            data-testid={ `${index}-horizontal-favorite-btn` }
+            src={ blackHeart }
+            alt=""
+          />
+        </button>
+      );
+    } return (
+      <button
+        key={ index }
+        type="button"
+        onClick={ () => handleFavorite(type, obj, blackHeart) }
+      >
+        <img
+          className="favIcon"
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          src={ whiteHeart }
+          alt=""
+        />
+      </button>
+    );
+  };
 
   return (
     <div>
@@ -48,111 +80,92 @@ function FavoriteRecipes({ history }) {
         />
       </div>
       <div>
-        { favorite && favorite.filter(({ type }) => {
-          if (drink === true) return type === 'bebida';
-          if (food === true) return type === 'comida';
-          return favorite;
-        }).map((obj, index) => {
-          if (obj.type === 'comida') {
-            return ( // Card para comidas !!
-            // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-noninteractive-element-interactions.md
+        { favoriteRecipes && favoriteRecipes
+          .filter((favRecipe) => {
+            if (drink) {
+              return favRecipe.type === 'bebida';
+            } if (food) {
+              return favRecipe.type === 'comida';
+            }
+            return favRecipe;
+          })
+          .map((obj, index) => {
+            if (obj.type === 'comida') {
+              return ( // Card para comidas !!
+              // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-noninteractive-element-interactions.md
+                <section key={ obj.id }>
+                  <img
+                    src={ obj.image }
+                    alt={ obj.name }
+                    data-testid={ `${index}-horizontal-image` }
+                    role="presentation"
+                    onClick={ () => history.push(`/comidas/${obj.id}`) }
+                    width="200"
+                  />
+                  <h1
+                    data-testid={ `${index}-horizontal-top-text` }
+                  >
+                    { `${obj.area} - ${obj.category}` }
+                  </h1>
+                  <p
+                    data-testid={ `${index}-horizontal-name` }
+                    role="presentation"
+                    onClick={ () => history.push(`/comidas/${obj.id}`) }
+                  >
+                    { obj.name }
+                  </p>
+                  {checkFavorites(obj, index, 'meal')}
+                  <Button
+                  // https://web.dev/async-clipboard/
+                    type="button"
+                    onClick={ () => {
+                      navigator.clipboard.writeText(`http://localhost:3000/comidas/${obj.id}`);
+                      setUrl(true);
+                    } }
+                    value={ <img
+                      alt="Share Icon"
+                      src={ shareIcon }
+                      data-testid={ `${index}-horizontal-share-btn` }
+                    /> }
+                  />
+                  { url && <p> Link copiado! </p>}
+                </section>
+              );
+            } return ( // Card para bebidas
               <section key={ obj.id }>
                 <img
-                  src={ obj.image }
                   alt={ obj.name }
+                  src={ obj.image }
                   data-testid={ `${index}-horizontal-image` }
                   role="presentation"
-                  onClick={ () => history.push(`/comidas/${obj.id}`) }
+                  onClick={ () => history.push(`/bebidas/${obj.id}`) }
                   width="200"
                 />
-                <h1
+                <p
                   data-testid={ `${index}-horizontal-top-text` }
                 >
-                  { `${obj.area} - ${obj.category}` }
-                </h1>
+                  {obj.alcoholicOrNot}
+                </p>
                 <p
                   data-testid={ `${index}-horizontal-name` }
                   role="presentation"
-                  onClick={ () => history.push(`/comidas/${obj.id}`) }
+                  onClick={ () => history.push(`/bebidas/${obj.id}`) }
                 >
                   { obj.name }
                 </p>
+                {checkFavorites(obj, index, 'drink')}
                 <Button
-                  // https://stackoverflow.com/questions/54807454/what-is-prevstate-in-reactjs
                   type="button"
-                  onClick={ () => {
-                    setFavorite((prevState) => (
-                      prevState.filter(({ name }) => name !== obj.name)));
-                  } }
+                  onClick={ () => { navigator.clipboard.writeText(`http://localhost:3000/comidas/${obj.id}`); } }
                   value={ <img
-                    src={ blackHeartIcon }
-                    alt="Black HeartIcon"
-                    data-testid={ `${index}-horizontal-favorite-btn` }
-                  /> }
-                />
-                <Button
-                  // https://web.dev/async-clipboard/
-                  type="button"
-                  onClick={ () => {
-                    navigator.clipboard.writeText(`http://localhost:3000/comidas/${obj.id}`);
-                    setUrl(true);
-                  } }
-                  value={ <img
-                    alt="Share Icon"
                     src={ shareIcon }
+                    alt="Share Icon"
                     data-testid={ `${index}-horizontal-share-btn` }
                   /> }
                 />
-                { url && <p> Link copiado! </p>}
               </section>
             );
-          } return ( // Card para bebidas
-            <section key={ obj.id }>
-              <img
-                alt={ obj.name }
-                src={ obj.image }
-                data-testid={ `${index}-horizontal-image` }
-                role="presentation"
-                onClick={ () => history.push(`/bebidas/${obj.id}`) }
-                width="200"
-              />
-              <p
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                {obj.alcoholicOrNot}
-              </p>
-              <p
-                data-testid={ `${index}-horizontal-name` }
-                role="presentation"
-                onClick={ () => history.push(`/bebidas/${obj.id}`) }
-              >
-                { obj.name }
-              </p>
-              <Button
-                // https://stackoverflow.com/questions/54807454/what-is-prevstate-in-reactjs
-                type="button"
-                onClick={ () => {
-                  setFavorite((prevState) => (
-                    prevState.filter(({ id }) => id !== obj.id)));
-                } }
-                value={ <img
-                  src={ blackHeartIcon }
-                  alt="BlackHeartIcon"
-                  data-testid={ `${index}-horizontal-favorite-btn` }
-                /> }
-              />
-              <Button
-                type="button"
-                onClick={ () => { navigator.clipboard.writeText(`http://localhost:3000/comidas/${obj.id}`); } }
-                value={ <img
-                  src={ shareIcon }
-                  alt="Share Icon"
-                  data-testid={ `${index}-horizontal-share-btn` }
-                /> }
-              />
-            </section>
-          );
-        })}
+          })}
       </div>
     </div>
   );
