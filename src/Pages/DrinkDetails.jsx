@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Carousel, CarouselItem } from 'react-bootstrap';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import '../App.css';
+import CustomCarousel from './CustomCarousel';
+import FavoriteButton from './Utils/FavoriteButton';
+
+const copy = require('clipboard-copy');
 
 export default function DrinkDetalis() {
   const [drinkDetails, setDrinkDetails] = useState({});
+  const [copyLink, setCopyLink] = useState(false);
   const [meals, setMeals] = useState([]);
   const SIX = 6;
 
-  let count1 = 0;
-  let count2 = 1;
+  const locationToClipboard = useLocation().pathname;
+  const getLocation = () => {
+    const clipboardLocation = `http://localhost:3000${locationToClipboard}`;
+    return clipboardLocation;
+  };
 
   const recipesDone = JSON.parse(localStorage.getItem('doneRecipes'));
   const test = recipesDone || [];
   let recipeInProgress = JSON
     .parse(localStorage.getItem('inProgressRecipes'));
-  if (recipeInProgress) recipeInProgress = recipeInProgress.drinks;
+  if (recipeInProgress) recipeInProgress = recipeInProgress.cocktails;
   if (!recipeInProgress) recipeInProgress = {};
 
   const firstCarousel = meals.length ? [meals[0], meals[2], meals[4]] : [];
@@ -73,8 +80,18 @@ export default function DrinkDetalis() {
       />
       <p data-testid="recipe-title">{ drinkDetails.strDrink }</p>
       <p data-testid="recipe-category">{ drinkDetails.strAlcoholic }</p>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
-      <button type="button" data-testid="favorite-btn">Favoritar</button>
+      <button
+        onClick={ () => {
+          setCopyLink(true);
+          copy(getLocation());
+        } }
+        type="button"
+        data-testid="share-btn"
+      >
+        Compartilhar
+      </button>
+      <FavoriteButton props={ { drinkDetails } } />
+      {copyLink && <p>Link copiado!</p>}
       <p data-testid="recipe-category">{drinkDetails.strCategory}</p>
       <ul>
         { ingredientList.map((ingredient, index) => (
@@ -98,39 +115,7 @@ export default function DrinkDetalis() {
          autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen={ youtubeConf }
       />
-      <Carousel>
-        {firstCarousel.map((meal, index) => {
-          if (index > 0) count1 += 2;
-          return (
-            <CarouselItem
-              key={ `meal${index}` }
-              data-testid={ `${count1}-recomendation-card` }
-            >
-              <img className="d-block w-100" src={ meal.strMealThumb } alt="meal" />
-              <Carousel.Caption>
-                <p>{meal.strCategory}</p>
-                <p data-testid={ `${count1}-recomendation-title` }>{meal.strMeal}</p>
-              </Carousel.Caption>
-            </CarouselItem>);
-        })}
-      </Carousel>
-      <Carousel>
-        {secondCarousel.map((meal, index) => {
-          if (index > 0) count2 += 2;
-          return (
-            <CarouselItem
-              key={ `meal${index}` }
-              data-testid={ `${count2}-recomendation-card` }
-            >
-              {/* Comment */}
-              <img className="d-block w-100" src={ meal.strMealThumb } alt="Meal" />
-              <Carousel.Caption>
-                <p>{meal.strCategory}</p>
-                <p data-testid={ `${count2}-recomendation-title` }>{meal.strMeal}</p>
-              </Carousel.Caption>
-            </CarouselItem>);
-        })}
-      </Carousel>
+      <CustomCarousel props={ { firstCarousel, secondCarousel } } />
       <Link to={ `/bebidas/${id}/in-progress` }>
         {!test2 ? hiddenButton : null}
       </Link>

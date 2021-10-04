@@ -2,12 +2,15 @@ import React from 'react';
 import { Carousel, CarouselItem } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import '../App.css';
+import { useLocation } from 'react-router';
 
 export default function CustomCarousel(
   { props: { firstCarousel, secondCarousel } },
 ) {
   let count1 = 0;
   let count2 = 1;
+
+  const pathIsMeals = useLocation().pathname.includes('/comidas');
 
   return (
     <>
@@ -19,10 +22,18 @@ export default function CustomCarousel(
               key={ `drink${index}` }
               data-testid={ `${count1}-recomendation-card` }
             >
-              <img className="d-block w-100" src={ drink.strDrinkThumb } alt="drink" />
+              <img
+                className="d-block w-100"
+                src={ pathIsMeals ? drink.strDrinkThumb : drink.strMealThumb }
+                alt="drink"
+              />
               <Carousel.Caption>
                 <p>{drink.strCategory}</p>
-                <p data-testid={ `${count1}-recomendation-title` }>{drink.strDrink}</p>
+                <p
+                  data-testid={ `${count1}-recomendation-title` }
+                >
+                  {pathIsMeals ? drink.strDrink : drink.strMeal}
+                </p>
               </Carousel.Caption>
             </CarouselItem>);
         })}
@@ -36,10 +47,18 @@ export default function CustomCarousel(
               data-testid={ `${count2}-recomendation-card` }
             >
               {/* Comment */}
-              <img className="d-block w-100" src={ drink.strDrinkThumb } alt="Meal" />
+              <img
+                className="d-block w-100"
+                src={ pathIsMeals ? drink.strDrinkThumb : drink.strMealThumb }
+                alt="Meal"
+              />
               <Carousel.Caption>
                 <p>{drink.strCategory}</p>
-                <p data-testid={ `${count2}-recomendation-title` }>{drink.strDrink}</p>
+                <p
+                  data-testid={ `${count2}-recomendation-title` }
+                >
+                  {pathIsMeals ? drink.strDrink : drink.strMeal}
+                </p>
               </Carousel.Caption>
             </CarouselItem>);
         })}
