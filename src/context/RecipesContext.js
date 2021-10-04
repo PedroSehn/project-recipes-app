@@ -2,7 +2,6 @@ import React, {
   createContext,
   useContext,
   useState,
-  useCallback,
   useEffect,
 } from 'react';
 import PropTypes from 'prop-types';
@@ -17,60 +16,28 @@ const cocktailsInitialState = {
   list: [], // Lista de comidas recuperadas pela API
   inProgress: {}, // Objeto onde cada chave é o id da receita em andamento e o valor correspondente é o array com os ingredientes já marcados
 };
+
 export const RecipesContext = createContext();
+
 export const RecipesProvider = ({ children }) => {
   const [meals, setMeals] = useState(mealsInitialState);
   const [cocktails, setCocktails] = useState(cocktailsInitialState);
-  const [ingredientsList, setIngredientsList] = useState([]);
   const [finishedRecipes, setFinishedRecipes] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+
   const setMealsList = (mealsList) => {
     setMeals({
       ...meals,
       list: mealsList,
     });
   };
+
   const setCocktailsList = (cocktailsList) => {
     setCocktails({
       ...cocktails,
       list: cocktailsList,
     });
   };
-
-  const getRandomRecipe = useCallback(async (page) => {
-    if (page === 'comidas') {
-      const { meals: mealsApi } = await fetch('https://www.themealdb.com/api/json/v1/1/random.php').then((response) => response.json());
-      return mealsApi[0].idMeal;
-    }
-    if (page === 'bebidas') {
-      const { drinks } = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php').then((response) => response.json());
-      return drinks[0].idDrink;
-    }
-  }, []);
-
-  const fecthIngredients = useCallback(async (type) => {
-    const MAX_INGREDIENTS = 12;
-
-    if (type === 'comidas') {
-      const { meals: ingredients } = await fetch(
-        'https://www.themealdb.com/api/json/v1/1/list.php?i=list',
-      ).then((response) => response.json());
-      const slice = ingredients.slice(0, MAX_INGREDIENTS);
-      setIngredientsList(slice);
-      return;
-    }
-
-    if (type === 'bebidas') {
-      const { drinks: ingredients } = await fetch(
-        'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list',
-      ).then((response) => response.json());
-      const slice = ingredients.slice(0, MAX_INGREDIENTS);
-      setIngredientsList(slice);
-      return;
-    }
-
-    setIngredientsList([]);
-  }, []);
 
   // Referência: https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
   function capitalizeFirstLetter(string) {
@@ -220,17 +187,14 @@ export const RecipesProvider = ({ children }) => {
   }, [finishedRecipes]);
 
   const context = {
-    getRandomRecipe,
     setMealsList,
     setCocktailsList,
     setFinishedRecipes,
-    fecthIngredients,
     handleFavorite,
     handleFinished,
     handleInProgress,
     favoriteRecipes,
     finishedRecipes,
-    ingredientsList,
     meals,
     cocktails,
   };

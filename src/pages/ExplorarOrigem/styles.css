@@ -1,0 +1,31 @@
+.area-card-container {
+  box-sizing: content-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 24px 0;
+  padding: 0 16px;
+}
+
+.area-card-container a {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+  padding: 8px;
+  width: 45%;
+}
+
+.area-card-container a img {
+  border-radius: 8px;
+  height: auto;
+  width: 100%;
+}
+
+.area-card-container a h5 {
+  color: black;
+  margin: 8px 0 0;
+}
