@@ -1,11 +1,11 @@
 .login {
-  display: flex;
-  background:url( 'https://i1.wp.com/www.eurodicas.com.br/wp-content/uploads/2018/02/comidas-tipicas-da-irlanda-1.jpg?fit=1360%2C907&ssl=1' );
+  background: url('https://i1.wp.com/www.eurodicas.com.br/wp-content/uploads/2018/02/comidas-tipicas-da-irlanda-1.jpg?fit=1360%2C907&ssl=1');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
   position: relative;
+  display: flex;
 }
 
 .login fieldset {
