@@ -1,11 +1,11 @@
 .receitasFeitas {
-  top: 184px;
-  left: 16px;
-  height: 53px;
-  width: 329px;
-  margin: 20px;
   background: #c4c4c4;
   border-radius: 4px;
+  height: 53px;
+  left: 16px;
+  margin: 20px;
+  top: 184px;
+  width: 329px;
 }
 
 .receitasFavoritas{
