@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation, useParams, useHistory } from 'react-router-dom';
 import ReactPlayer from 'react-player';
