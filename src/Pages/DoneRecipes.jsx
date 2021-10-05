@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import HeaderWithoutSearch from './HeaderWithoutSearch';
 
 export default function DoneRecipes() {
-  const lsDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  let lsDoneRecipes = localStorage.getItem('doneRecipes') || '[]';
+  lsDoneRecipes = JSON.parse(lsDoneRecipes);
 
   return (
     <>
