@@ -6,7 +6,7 @@ import { useRecipesContext } from '../context/Provider';
 
 export default function ExploreIngredientDrink() {
   const [ingredientsDrink, setIngredientsDrink] = useState([]);
-  const { setIngredientsDrinks } = useRecipesContext();
+  const { setIngredientsDrinks, setRecipesApp, recipesApp } = useRecipesContext();
   const history = useHistory();
   const limits = 12;
 
@@ -37,7 +37,16 @@ export default function ExploreIngredientDrink() {
                 type="button"
                 onClick={ ({ target }) => {
                   getDrinkFromIngredients(target.getAttribute('name'));
-                  return history.push('/bebidas');
+                  setRecipesApp({ ...recipesApp, loading: true });
+
+                  const url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?${drink.strIngredient1}=i`;
+                  fetch(url)
+                    .then((request) => {
+                      setRecipesApp({
+                        ...recipesApp, dataCategoryAPI: request.drinks, loading: false,
+                      });
+                    }).then(() => history.push('/bebidas'))
+                    .catch(() => console.log('deu ruim'));
                 } }
               >
                 <div>
