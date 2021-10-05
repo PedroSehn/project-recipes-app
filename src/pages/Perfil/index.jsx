@@ -23,7 +23,7 @@ function Perfil({ history }) {
   return (
     <main>
       <Header pageTitle="Perfil" showSearchIcon={ false } />
-      <div>
+      <div className="main">
         {renderEmail()}
         <button
           className="receitasFeitas"

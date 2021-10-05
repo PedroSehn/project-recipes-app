@@ -1,15 +1,15 @@
 .receitasFeitas {
-  position: absolute;
-  background: #C4C4C4;
+  top: 184px;
+  left: 16px;
   height: 53px;
   width: 329px;
-  left: 16px;
-  top: 184px;
+  margin: 20px;
+  background: #c4c4c4;
   border-radius: 4px;
 }
 
 .receitasFavoritas{
-  position: absolute;
+  margin: 20px;
   background: #c4c4c4;
   height: 53px;
   width: 329px;
@@ -19,7 +19,7 @@
 }
 
 .exit {
-  position: absolute;
+  margin: 20px;
   background: #c4c4c4;
   height: 53px;
   width: 329px;
@@ -29,12 +29,18 @@
 }
 
 .name {
-  position: absolute;
+  padding-right: 450px;
+  margin: 20px;
   height: 35px;
   width: 225px;
   left: 58px;
   top: 111px;
-  line-height: 35px;
   display: flex;
-  align-items: flex-end;
+}
+
+.main{
+  display: flex;
+  height: 100%;
+  align-items: center;
+  flex-direction: column;
 }
