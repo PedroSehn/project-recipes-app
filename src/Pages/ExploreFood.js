@@ -4,6 +4,12 @@ import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 
 export default function ExploreFood({ history }) {
+  const fetchSomeFood = async () => {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+    const { meals } = await response.json();
+    const id = await meals[0].idMeal;
+    return `/comidas/${id}`;
+  };
   return (
     <div>
       <Header />
@@ -24,7 +30,7 @@ export default function ExploreFood({ history }) {
       <button
         type="button"
         data-testid="explore-surprise"
-        onClick={ () => history.push('/comidas/52771') }
+        onClick={ async () => history.push(await fetchSomeFood()) }
       >
         Me Surpreenda!
       </button>
