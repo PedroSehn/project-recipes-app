@@ -4,8 +4,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
-  position: relative;
   display: flex;
+  position: relative;
 }
 
 .login fieldset {

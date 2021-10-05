@@ -23,9 +23,10 @@ function Perfil({ history }) {
   return (
     <main>
       <Header pageTitle="Perfil" showSearchIcon={ false } />
-      <div>
+      <div className="main">
         {renderEmail()}
         <button
+          className="receitasFeitas"
           type="button"
           data-testid="profile-done-btn"
           onClick={ () => history.push('/receitas-feitas') }
@@ -33,6 +34,7 @@ function Perfil({ history }) {
           Receitas Feitas
         </button>
         <button
+          className="receitasFavoritas"
           type="button"
           data-testid="profile-favorite-btn"
           onClick={ () => history.push('/receitas-favoritas') }
@@ -40,6 +42,7 @@ function Perfil({ history }) {
           Receitas Favoritas
         </button>
         <button
+          className="exit"
           type="button"
           data-testid="profile-logout-btn"
           onClick={ () => clearAndRedirect() }
