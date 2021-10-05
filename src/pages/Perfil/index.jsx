@@ -16,14 +16,14 @@ function Perfil({ history }) {
 
   const renderEmail = () => {
     if (name) {
-      return <h1 data-testid="profile-email">{name.email}</h1>;
-    } return <h1 data-testid="profile-email">{email}</h1>;
+      return <h1 className="name" data-testid="profile-email">{name.email}</h1>;
+    } return <h1 className="name" data-testid="profile-email">{email}</h1>;
   };
 
   return (
     <main>
       <Header pageTitle="Perfil" showSearchIcon={ false } />
-      <div className="main">
+      <div>
         {renderEmail()}
         <button
           className="receitasFeitas"

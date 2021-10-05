@@ -1,0 +1,41 @@
+.receitasFeitas {
+  position: absolute;
+  width: 329px;
+  height: 53px;
+  left: 16px;
+  top: 184px;
+  background: #C4C4C4;
+  border-radius: 4px;
+}
+
+.receitasFavoritas{
+  position: absolute;
+  width: 329px;
+  height: 53px;
+  left: 16px;
+  top: 257px;
+  background: #C4C4C4;
+  border-radius: 4px;
+}
+
+.exit {
+  position: absolute;
+  width: 329px;
+  height: 53px;
+  left: 16px;
+  top: 328px;
+  background: #C4C4C4;
+  border-radius: 4px;
+}
+
+.name {
+  position: absolute;
+  width: 225px;
+  height: 35px;
+  left: 58px;
+  top: 111px;
+  line-height: 35px;
+  display: flex;
+  align-items: flex-end;
+  color: #000000;
+}
