@@ -2,52 +2,53 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from 'react-router-dom';
 
-export default function MealsInProgress() {
-  const [mealDetails, setMealDetails] = useState(null);
+export default function DrinkInProgress() {
+  const [drinkDetails, setDrinkDetails] = useState(null);
   const [ingredientList, setIngredientList] = useState([]);
 
   // id => API
-  const { id } = useParams();
+  const { idDrink } = useParams();
 
   // ref: Lucas Caribé
   const TWENTY = 20;
 
   useEffect(() => {
-    const fetchMealIdAPi = async () => {
-      const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`).then((res) => res.json());
-      setMealDetails(response.meals[0]);
+    const fetchDrinkIdAPi = async () => {
+      const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDrink}`).then((res) => res.json());
+      setDrinkDetails(response.drinks[0]);
     };
-    if (id) {
-      fetchMealIdAPi();
+    if (idDrink) {
+      fetchDrinkIdAPi();
     }
-  }, [id]);
+  }, [idDrink]);
 
   useEffect(() => {
     const lsValue = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (lsValue) {
-      setIngredientList(lsValue.meals[id]);
+      setIngredientList(lsValue.drinks[idDrink]);
     } else {
       localStorage.setItem('inProgressRecipes',
-        JSON.stringify({ drinks: {}, meals: { [id]: [] } }));
+        JSON.stringify({ drinks: { [idDrink]: [] }, meals: {} }));
     }
-  }, [id]);
+  }, [idDrink]);
 
   useEffect(() => {
-    if (mealDetails && ingredientList.length < 1) {
+    if (drinkDetails && ingredientList.length < 1) {
       const ingredientes = [];
+      console.log(ingredientList.length);
 
       for (let index = 1; index <= TWENTY; index += 1) {
-        if (mealDetails[`strIngredient${index}`]) {
+        if (drinkDetails[`strIngredient${index}`]) {
           ingredientes.push({
-            [`ingredients${index}`]: mealDetails[`strIngredient${index}`],
-            [`measure${index}`]: mealDetails[`strMeasure${index}`],
+            [`ingredients${index}`]: drinkDetails[`strIngredient${index}`],
+            [`measure${index}`]: drinkDetails[`strMeasure${index}`],
             checked: false,
           });
         }
       }
       setIngredientList(ingredientes);
     }
-  }, [mealDetails, ingredientList]);
+  }, [drinkDetails, ingredientList]);
 
   useEffect(() => {
     const lsValue = localStorage.getItem('inProgressRecipes')
@@ -56,11 +57,11 @@ export default function MealsInProgress() {
     const oldValue = JSON.parse(lsValue);
 
     const value = {
-      [id]: [...ingredientList],
+      [idDrink]: [...ingredientList],
     };
-    const newValue = { ...oldValue, meals: value };
+    const newValue = { ...oldValue, drinks: value };
     localStorage.setItem('inProgressRecipes', JSON.stringify(newValue));
-  }, [ingredientList, id]);
+  }, [ingredientList, idDrink]);
 
   const onCheckboxClick = (index) => {
     const newValue = [...ingredientList];
@@ -68,19 +69,19 @@ export default function MealsInProgress() {
     setIngredientList(newValue);
   };
 
-  if (!mealDetails) { return <h1>Loading...</h1>; }
+  if (!drinkDetails) { return <h1>Loading...</h1>; }
 
   return (
     <>
       <img
-        src={ mealDetails.strMealThumb }
+        src={ drinkDetails.strDrinkThumb }
         alt="img-Details"
         data-testid="recipe-photo"
       />
-      <p data-testid="recipe-title">{mealDetails.strMeal}</p>
+      <p data-testid="recipe-title">{drinkDetails.strDrink}</p>
       <button type="button" data-testid="share-btn">Compartilhar</button>
       <button type="button" data-testid="favorite-btn">Favoritar</button>
-      <p data-testid="recipe-category">{mealDetails.strCategory}</p>
+      <p data-testid="recipe-category">{drinkDetails.strCategory}</p>
       {ingredientList.map((ingredient, index) => (
         <label
           key={ index }
@@ -100,7 +101,7 @@ export default function MealsInProgress() {
         </label>
       ))}
       <h3>Instruções</h3>
-      <p data-testid="instructions">{mealDetails.strInstructions}</p>
+      <p data-testid="instructions">{drinkDetails.strInstructions}</p>
       <div>
         <button
           type="button"

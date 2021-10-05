@@ -19,6 +19,7 @@ import ExploreRecipesByIngredient from './Pages/ExploreMealsRecipesByIngredient'
 import ExploreDrinksRecipesByIngredient from './Pages/ExploreDrinksRecipesByIngredient';
 import NotFound from './Pages/NotFound';
 import MealsInProgress from './Pages/MealsInProgress';
+import DrinkInProgress from './Pages/DrinkInProgress';
 
 function App() {
   // const { randomMeal } = useContext(RecipesContext);
@@ -51,6 +52,7 @@ function App() {
           <Route exact path="/explorar/comidas" component={ ExploreMealsPage } />
           <Route exact path="/comidas/:idMeal" component={ MealDetails } />
           <Route exact path="/bebidas/:idDrink" component={ DrinkDetails } />
+          <Route exact path="/bebidas/:idDrink/in-progress" component={ DrinkInProgress } />
           <Route
             exact
             path="/explorar/comidas/ingredientes"
