@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function MealsInProgress() {
-  const [mealDetails, setMealDetails] = useState(null);
+  const [mealDetails, setMealDetails] = useState([]);
   const [ingredientList, setIngredientList] = useState([]);
 
   // id => API
@@ -20,9 +20,7 @@ export default function MealsInProgress() {
     if (id) {
       fetchMealIdAPi();
     }
-  }, [id]);
 
-  useEffect(() => {
     const lsValue = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (lsValue) {
       setIngredientList(lsValue.meals[id]);
@@ -68,7 +66,7 @@ export default function MealsInProgress() {
     setIngredientList(newValue);
   };
 
-  if (!mealDetails) { return <h1>Loading...</h1>; }
+  // if (!mealDetails) { return <h1>Loading...</h1>; }
 
   return (
     <>
@@ -102,13 +100,15 @@ export default function MealsInProgress() {
       <h3>Instruções</h3>
       <p data-testid="instructions">{mealDetails.strInstructions}</p>
       <div>
-        <button
-          type="button"
-          data-testid="finish-recipe-btn"
-          className="startRecipeButton"
-        >
-          Finalizar Receita
-        </button>
+        <Link to="/receitas-feitas">
+          <button
+            type="button"
+            data-testid="finish-recipe-btn"
+            className="startRecipeButton"
+          >
+            Finalizar Receita
+          </button>
+        </Link>
       </div>
     </>
   );

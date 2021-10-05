@@ -52,7 +52,11 @@ function App() {
           <Route exact path="/explorar/comidas" component={ ExploreMealsPage } />
           <Route exact path="/comidas/:idMeal" component={ MealDetails } />
           <Route exact path="/bebidas/:idDrink" component={ DrinkDetails } />
-          <Route exact path="/bebidas/:idDrink/in-progress" component={ DrinkInProgress } />
+          <Route
+            exact
+            path="/bebidas/:idDrink/in-progress"
+            component={ DrinkInProgress }
+          />
           <Route
             exact
             path="/explorar/comidas/ingredientes"

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function DrinkInProgress() {
-  const [drinkDetails, setDrinkDetails] = useState(null);
+  const [drinkDetails, setDrinkDetails] = useState([]);
   const [ingredientList, setIngredientList] = useState([]);
 
   // id => API
@@ -20,9 +20,7 @@ export default function DrinkInProgress() {
     if (idDrink) {
       fetchDrinkIdAPi();
     }
-  }, [idDrink]);
 
-  useEffect(() => {
     const lsValue = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (lsValue) {
       setIngredientList(lsValue.drinks[idDrink]);
@@ -69,7 +67,7 @@ export default function DrinkInProgress() {
     setIngredientList(newValue);
   };
 
-  if (!drinkDetails) { return <h1>Loading...</h1>; }
+  // if (!drinkDetails) { return <h1>Loading...</h1>; }
 
   return (
     <>
@@ -103,13 +101,15 @@ export default function DrinkInProgress() {
       <h3>Instruções</h3>
       <p data-testid="instructions">{drinkDetails.strInstructions}</p>
       <div>
-        <button
-          type="button"
-          data-testid="finish-recipe-btn"
-          className="startRecipeButton"
-        >
-          Finalizar Receita
-        </button>
+        <Link to="/receitas-feitas">
+          <button
+            type="button"
+            data-testid="finish-recipe-btn"
+            className="startRecipeButton"
+          >
+            Finalizar Receita
+          </button>
+        </Link>
       </div>
     </>
   );
