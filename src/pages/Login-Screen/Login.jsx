@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './Login.css';
-import './animation.css';
 import PropTypes from 'prop-types';
 import Input from './Input';
 import { useAuth } from '../../context';

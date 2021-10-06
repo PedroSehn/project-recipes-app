@@ -12,13 +12,13 @@
   animation-fill-mode: backwards;
   animation-name: up;
 }
+
 .login fieldset {
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  
 }
 
 .loginButton {
@@ -33,7 +33,6 @@
 
 .login fieldset * {
   padding: 10px;
-  
 }
 
 .login fieldset label {
@@ -65,4 +64,28 @@
   animation-duration: 3000ms;
   animation-fill-mode: backwards;
   animation-name: up;
+}
+
+@keyframes up {
+
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes right {
+
+  from {
+    transform: translate(-100%);
+  }
+  
+  to {
+    transform: translate(0);
+  }
 }
