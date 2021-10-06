@@ -1,16 +1,7 @@
 .login {
-  background: url('https://i1.wp.com/www.eurodicas.com.br/wp-content/uploads/2018/02/comidas-tipicas-da-irlanda-1.jpg?fit=1360%2C907&ssl=1');
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
   height: 100vh;
-  position: relative;
-}
-
-.title {
-  animation-duration: 1000ms;
-  animation-fill-mode: backwards;
-  animation-name: up;
+  width: 100vw;
 }
 
 .login fieldset {
@@ -20,16 +11,6 @@
   justify-content: center;
   width: 100%;
 }
-
-.loginButton {
-  animation-duration: 4000ms;
-  animation-fill-mode: backwards;
-  animation-name: up;
-  border: 2px solid;
-  border-radius: 10px;
-  width: 80px;
-}
-
 
 .login fieldset * {
   padding: 10px;
@@ -52,40 +33,4 @@
 
 .login fieldset input:focus {
   width: 360px;
-}
-
-.inputEmail {
-  animation-duration: 2000ms;
-  animation-fill-mode: backwards;
-  animation-name: up;
-}
-
-.inputSenha {
-  animation-duration: 3000ms;
-  animation-fill-mode: backwards;
-  animation-name: up;
-}
-
-@keyframes up {
-
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes right {
-
-  from {
-    transform: translate(-100%);
-  }
-
-  to {
-    transform: translate(0);
-  }
 }

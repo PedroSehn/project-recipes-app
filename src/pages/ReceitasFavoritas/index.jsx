@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './index.css';
 import PropTypes from 'prop-types';
+
 import { useRecipes } from '../../context';
 
 import Header from '../../components/Header';
@@ -25,7 +25,6 @@ function FavoriteRecipes({ history }) {
     if (checkIfIsFavorite) {
       return (
         <button
-          className="buttonDrinks"
           key={ index }
           type="button"
           onClick={ () => handleFavorite(type, obj, whiteHeart) }
@@ -57,9 +56,8 @@ function FavoriteRecipes({ history }) {
   return (
     <div>
       <Header pageTitle="Receitas Favoritas " showSearchIcon={ false } />
-      <div className="filter">
+      <div>
         <Button
-          className="buttonAll"
           name="All"
           type="button"
           id="filter-by-all-btn"
@@ -67,7 +65,6 @@ function FavoriteRecipes({ history }) {
           onClick={ () => { setFood(false); setDrink(false); } }
         />
         <Button
-          className="buttonFoods"
           name="Foods"
           type="button"
           id="filter-by-food-btn"
@@ -75,7 +72,6 @@ function FavoriteRecipes({ history }) {
           onClick={ () => { setFood(true); setDrink(false); } }
         />
         <Button
-          className="buttonDrinks"
           name="Drinks"
           type="button"
           id="filter-by-drink-btn"
@@ -83,7 +79,7 @@ function FavoriteRecipes({ history }) {
           onClick={ () => { setFood(false); setDrink(true); } }
         />
       </div>
-      <div className="itensList">
+      <div>
         { favoriteRecipes && favoriteRecipes
           .filter((favRecipe) => {
             if (drink) {
@@ -97,17 +93,14 @@ function FavoriteRecipes({ history }) {
             if (obj.type === 'comida') {
               return ( // Card para comidas !!
               // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-noninteractive-element-interactions.md
-                <section
-                  className="card"
-                  key={ obj.id }
-                >
+                <section key={ obj.id }>
                   <img
-                    className="image"
                     src={ obj.image }
                     alt={ obj.name }
                     data-testid={ `${index}-horizontal-image` }
                     role="presentation"
                     onClick={ () => history.push(`/comidas/${obj.id}`) }
+                    width="200"
                   />
                   <h1
                     data-testid={ `${index}-horizontal-top-text` }
@@ -124,7 +117,6 @@ function FavoriteRecipes({ history }) {
                   {checkFavorites(obj, index, 'meal')}
                   <Button
                   // https://web.dev/async-clipboard/
-                    className="buttonDrinks"
                     type="button"
                     onClick={ () => {
                       navigator.clipboard.writeText(`http://localhost:3000/comidas/${obj.id}`);
@@ -140,17 +132,14 @@ function FavoriteRecipes({ history }) {
                 </section>
               );
             } return ( // Card para bebidas
-              <section
-                className="card"
-                key={ obj.id }
-              >
+              <section key={ obj.id }>
                 <img
-                  className="image"
                   alt={ obj.name }
                   src={ obj.image }
                   data-testid={ `${index}-horizontal-image` }
                   role="presentation"
                   onClick={ () => history.push(`/bebidas/${obj.id}`) }
+                  width="200"
                 />
                 <p
                   data-testid={ `${index}-horizontal-top-text` }
@@ -166,7 +155,6 @@ function FavoriteRecipes({ history }) {
                 </p>
                 {checkFavorites(obj, index, 'drink')}
                 <Button
-                  className="buttonDrinks"
                   type="button"
                   onClick={ () => { navigator.clipboard.writeText(`http://localhost:3000/comidas/${obj.id}`); } }
                   value={ <img

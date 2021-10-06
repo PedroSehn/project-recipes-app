@@ -31,9 +31,7 @@ function Login({ history }) {
   return (
     <div className="login">
       <fieldset>
-        <h1 className="title">Login</h1>
         <Input
-          className="inputEmail"
           type="text"
           id="email-input"
           name="email"
@@ -44,7 +42,6 @@ function Login({ history }) {
           } }
         />
         <Input
-          className="inputSenha"
           type="password"
           id="password-input"
           name="password"
@@ -55,7 +52,6 @@ function Login({ history }) {
           } }
         />
         <button
-          className="loginButton"
           onClick={ () => saveStorage() }
           type="button"
           data-testid="login-submit-btn"
