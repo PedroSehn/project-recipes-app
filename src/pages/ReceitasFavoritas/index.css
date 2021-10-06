@@ -9,7 +9,7 @@
 }
 
 .buttonFoods {
-  background: #C4C4C4;
+  background: #c4c4c4;
   border-radius: 4px;
   height: 45px;
   left: 129px;
@@ -19,7 +19,7 @@
 }
 
 .buttonDrinks {
-  background: #C4C4C4;
+  background: #c4c4c4;
   border-radius: 4px;
   height: 45px;
   left: 241px;
@@ -38,10 +38,10 @@
 }
 
 .card {
-  background: #FFFFFF;
-  border: 1px solid #F8EDED;
+  background: white;
+  border: 1px solid #f8eded;
   border-radius: 6px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px black;
   box-sizing: border-box;
   left: 15px;
   margin-bottom: 15px;

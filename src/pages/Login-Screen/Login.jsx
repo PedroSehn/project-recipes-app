@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
+import './animation.css';
 import PropTypes from 'prop-types';
 import Input from './Input';
 import { useAuth } from '../../context';
@@ -31,8 +32,9 @@ function Login({ history }) {
   return (
     <div className="login">
       <fieldset>
-        <h1>Login</h1>
+        <h1 className="title">Login</h1>
         <Input
+          className="inputEmail"
           type="text"
           id="email-input"
           name="email"
@@ -43,6 +45,7 @@ function Login({ history }) {
           } }
         />
         <Input
+          className="inputSenha"
           type="password"
           id="password-input"
           name="password"
