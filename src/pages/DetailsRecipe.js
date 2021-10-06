@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useCallback } from 'react';
 import { useLocation, useParams, useHistory } from 'react-router-dom';
 import ReactPlayer from 'react-player';
@@ -24,8 +25,10 @@ export default function DetailsRecipe() {
   const { id } = useParams();
   const { pathname } = useLocation();
   const type = pathname.includes('/comidas/') ? 'foods' : 'drinks';
+
   const currentPath = pathname.includes('/comidas/') ? '/comidas/' : '/bebidas/';
   const typeUpperCase = pathname.includes('/comidas/') ? 'Meal' : 'Drink';
+  const typeCopy = pathname.includes('/comidas') ? 'comida' : 'bebida';
 
   const { setRecipesApp } = useRecipesContext();
 
@@ -82,7 +85,10 @@ export default function DetailsRecipe() {
           </h1>
         </div>
         <div>
-          <CopyButton pathname={ pathname } />
+          <CopyButton
+            pathname={ pathname }
+            typeUrl={ `${typeCopy}s/${id}` }
+          />
           <FavoriteButton cardFavorite={ recipeDetails } type={ typeUpperCase } />
         </div>
         <hr />
