@@ -27,12 +27,15 @@ export default function ExploreIngredientDrink() {
 
   return (
     <div>
-      <Header title="Explorar Ingredientes" />
+      <header className="header">
+        <Header title="Explorar Ingredientes" />
+      </header>
       <div>
         {
           ingredientsDrink.map((drink, index) => (
             (index < limits) && (
               <button
+                className="btn"
                 name={ drink.stringredient1 }
                 type="button"
                 onClick={ ({ target }) => {

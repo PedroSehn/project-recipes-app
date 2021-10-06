@@ -22,6 +22,7 @@ export default function ExploreFood() {
       return (
         <Link to={ `/comidas/${idRandom}` }>
           <button
+            className="btn btn-outline-primary"
             type="button"
             data-testid="explore-surprise"
             name="Me Surpreenda"
@@ -35,15 +36,25 @@ export default function ExploreFood() {
   }
 
   return (
-    <div>
-      <Header title="Explorar Comidas" />
+    <>
+      <header className="header">
+        <Header title="Explorar Comidas" />
+      </header>
       <Link to="/explorar/comidas/ingredientes">
-        <button type="button" data-testid="explore-by-ingredient">
+        <button
+          className="btn btn-outline-primary"
+          type="button"
+          data-testid="explore-by-ingredient"
+        >
           Por Ingredientes
         </button>
       </Link>
       <Link to="/explorar/comidas/area">
-        <button type="button" data-testid="explore-by-area">
+        <button
+          className="btn btn-outline-primary"
+          type="button"
+          data-testid="explore-by-area"
+        >
           Por Local de Origem
         </button>
       </Link>
@@ -51,6 +62,6 @@ export default function ExploreFood() {
         randomMeals()
       }
       <Footer />
-    </div>
+    </>
   );
 }

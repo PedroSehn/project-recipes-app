@@ -3,8 +3,8 @@ import Header from '../components/Header';
 
 export default function DoneRecipe() {
   return (
-    <div>
+    <header className="header">
       <Header title="Receitas Feitas" />
-    </div>
+    </header>
   );
 }

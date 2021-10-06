@@ -56,6 +56,19 @@ export default function ProgressRecipeDrink({ match: { params: { id } } }) {
           Receita Finalizada
         </button>
       </Link>
+      <button
+        data-testid="share-btn"
+        onClick={ handleShare }
+        type="button"
+      >
+        Compartilhar
+      </button>
+      <button
+        data-testid="favorite-btn"
+        type="button"
+      >
+        Adicionar aos Favoritos
+      </button>
       <p data-testid="recipe-category">{ drink.strCategory }</p>
       <div>
         {

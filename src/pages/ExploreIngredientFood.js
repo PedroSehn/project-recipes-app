@@ -28,7 +28,10 @@ export default function ExploreIngredientFood() {
 
   return (
     <div>
-      <Header title="Explorar Ingredientes" />
+
+      <header className="header">
+        <Header title="Explorar Ingredientes" />
+      </header>
       <div>
         {
           ingredientsFood.map((meal, index) => (

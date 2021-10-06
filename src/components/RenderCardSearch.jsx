@@ -13,7 +13,7 @@ export default function RenderCardSearch({ cards, type }) {
   return (
     recipesApp.loading ? <h1>Loading</h1>
       : (
-        <>
+        <div>
           {cards.map((card, index) => {
             if (index >= MAX_CARDS) return '';
             return (
@@ -34,7 +34,7 @@ export default function RenderCardSearch({ cards, type }) {
               </Link>
             );
           })}
-        </>
+        </div>
       )
   );
 }

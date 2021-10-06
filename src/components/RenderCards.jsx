@@ -32,16 +32,22 @@ export default function RenderCards({ type, typeCards }) {
     const { pathname } = history.location;
     return (
       <Link to={ `${pathname}/${card[`id${type}`]}` } key={ card[`id${type}`] }>
-        <div data-testid={ `${index}-recipe-card` }>
+        <div
+          className="cardButton card"
+          data-testid={ `${index}-recipe-card` }
+        >
           <img
+            className="card-img-top HoverDiv"
             src={ card[`str${type}Thumb`] }
             alt={ card[`str${type}`] }
             data-testid={ `${index}-card-img` }
             width="100px"
           />
-          <h3 data-testid={ `${index}-card-name` }>
-            {card[`str${type}`]}
-          </h3>
+          <div className="card-body">
+            <h3 className="card-title" data-testid={ `${index}-card-name` }>
+              {card[`str${type}`]}
+            </h3>
+          </div>
         </div>
       </Link>
     );
@@ -62,10 +68,10 @@ export default function RenderCards({ type, typeCards }) {
   return (
     cards.loading ? <h1>Loading</h1>
       : (
-        <>
+        <div className="cardButton" style={ { textAlign: 'center' } }>
           {cards.cards[typeCards]
             .map((card, index) => renderCardsByCategories(card, index))}
-        </>
+        </div>
       )
   );
 }

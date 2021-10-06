@@ -58,45 +58,55 @@ export default function SearchInput({ fetchFood, typeLowCase, typeUpperCase }) {
     return (
       <form>
         <input
+          className="form-control"
           type="text"
           data-testid="search-input"
           name="search"
           value={ headerFilterBar.search }
           onChange={ handleSearchBar }
         />
-        <label htmlFor="ingredient">
-          Ingredientes
-          <input
-            value="i"
-            name="radioSelect"
-            id="ingredient"
-            type="radio"
-            data-testid="ingredient-search-radio"
-            onChange={ handleSearchBar }
-          />
-        </label>
-        <label htmlFor="name-search">
-          Nome
-          <input
-            value="s"
-            name="radioSelect"
-            id="name-search"
-            type="radio"
-            data-testid="name-search-radio"
-            onChange={ handleSearchBar }
-          />
-        </label>
-        <label htmlFor="first-letter">
-          Primeira letra
-          <input
-            value="f"
-            name="radioSelect"
-            id="first-letter"
-            type="radio"
-            data-testid="first-letter-search-radio"
-            onChange={ handleSearchBar }
-          />
-        </label>
+        <div className="mb-3 container">
+          <label className="form-label" htmlFor="ingredient">
+            Ingredientes
+            <input
+              className="form-check-input"
+              value="i"
+              name="radioSelect"
+              id="ingredient"
+              type="radio"
+              data-testid="ingredient-search-radio"
+              onChange={ handleSearchBar }
+            />
+          </label>
+        </div>
+        <div className="mb-3 container">
+          <label className="form-label" htmlFor="name-search">
+            Nome
+            <input
+              className="form-check-input"
+              value="s"
+              name="radioSelect"
+              id="name-search"
+              type="radio"
+              data-testid="name-search-radio"
+              onChange={ handleSearchBar }
+            />
+          </label>
+        </div>
+        <div className="mb-3 container">
+          <label className="form-label" htmlFor="first-letter">
+            Primeira letra
+            <input
+              className="form-check-input"
+              value="f"
+              name="radioSelect"
+              id="first-letter"
+              type="radio"
+              data-testid="first-letter-search-radio"
+              onChange={ handleSearchBar }
+            />
+          </label>
+        </div>
         <button
           className="btn btn-primary"
           type="button"
@@ -114,7 +124,6 @@ export default function SearchInput({ fetchFood, typeLowCase, typeUpperCase }) {
       <button
         type="button"
         onClick={ () => setToggleInput(!toggleInput) }
-        className="btn btn-warning"
       >
         <img src={ searchIcon } alt="search" data-testid="search-top-btn" />
       </button>

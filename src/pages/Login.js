@@ -23,6 +23,7 @@ export default function Login({ history }) {
   }
   return (
     <div className="login">
+      <h1 style={ { textAlign: 'center' } }>Receitas do grupo 9</h1>
       <div className="mb-3 container">
         <label className="login-name-input" htmlFor="email">
           email:

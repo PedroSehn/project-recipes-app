@@ -1,3 +1,7 @@
+body {
+  width: 360px;
+}
+
 .checkbox {
   margin: -2px 2px;
 }

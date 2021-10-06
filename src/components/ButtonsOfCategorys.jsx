@@ -41,8 +41,9 @@ export default function ButtonsOfCategory({ func, typeCategory, funcFilter }) {
   return (
     categorys.loading ? <h1>Loading</h1>
       : (
-        <>
+        <div className="buttonCategory">
           <button
+            className="btn btn-primary"
             type="button"
             onClick={ handleClick }
             data-testid="All-category-filter"
@@ -53,6 +54,7 @@ export default function ButtonsOfCategory({ func, typeCategory, funcFilter }) {
             if (index >= MAX_CARDS) return '';
             return (
               <button
+                className="btn btn-primary"
                 data-testid={ `${category.strCategory}-category-filter` }
                 type="button"
                 key={ index }
@@ -62,7 +64,7 @@ export default function ButtonsOfCategory({ func, typeCategory, funcFilter }) {
               </button>
             );
           })}
-        </>
+        </div>
       )
   );
 }

@@ -36,6 +36,19 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
     const finishButton = document.getElementById('finish-recipe-btn');
     finishButton.disabled = true;
   }, []);
+  
+  const loadRecipe = () => {
+    // if (localStorage['inProgressRecipes']) {
+    //   const setDiv = document.querySelector('#current-recipe');
+    //   const divItemStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    //   setDiv.innerHTML = divItemStorage;
+    // }
+  };
+
+  window.onload = async function onload() {
+    loadRecipe();
+  };
+
   // useEffect(() => {
   //   if (localStorage[id]) {
   //     const element = JSON.parse(localStorage.getItem(id));
@@ -67,6 +80,11 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
 
     localStorageInProgress();
   }, [recipeIngredients]);
+
+  // function saveDiv() {
+  //   const setDiv = document.querySelector('#current-recipe');
+  //   localStorage.setItem('inProgressRecipes', JSON.stringify(setDiv.innerHTML));
+  // }
 
   // function saveDiv() {
   //   const setDiv = document.querySelector('#current-recipe');
@@ -122,6 +140,7 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
                   />
                   <span>
                     { recipeIngredients[num - 1] }
+                    { `${meal[measures[num - 1]]} ${meal[ingredients[num - 1]]}` }
                   </span>
                 </label>
                 <br />

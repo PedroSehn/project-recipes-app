@@ -10,6 +10,28 @@
   width: 100%;
 }
 
+.buttonCategory {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  text-align: 'center';
+  width: '18rem';
+}
+
+.cardButton {
+  border: 1px solid rgb(204, 204, 204);
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 .footer {
   bottom: 0;
   display: flex;

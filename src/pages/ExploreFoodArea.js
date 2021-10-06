@@ -6,10 +6,12 @@ import SearchInput from '../components/SearchInput';
 export default function ExploreFoodArea() {
   return (
     <div>
-      <Header
-        title="Explorar Origem"
-      />
-      <SearchInput />
+      <header className="header">
+        <Header
+          title="Explorar Origem"
+        />
+        <SearchInput />
+      </header>
       <Footer />
     </div>
   );

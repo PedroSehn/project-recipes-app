@@ -13,15 +13,17 @@ export default function DrinkRecipes() {
   const { recipesApp } = useRecipesContext();
 
   return (
-    <div>
-      <Header
-        title="Bebidas"
-      />
-      <SearchInput
-        fetchFood={ fetchApiRecipes }
-        typeLowCase="drinks"
-        typeUpperCase="Drink"
-      />
+    <>
+      <header className="header">
+        <Header
+          title="Bebidas"
+        />
+        <SearchInput
+          fetchFood={ fetchApiRecipes }
+          typeLowCase="drinks"
+          typeUpperCase="Drink"
+        />
+      </header>
       {recipesApp.dataCategoryFoodAPI.length === 0
         ? (
           <>
@@ -47,6 +49,6 @@ export default function DrinkRecipes() {
             <Footer />
           </>
         )}
-    </div>
+    </>
   );
 }
