@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './ProgressRecipe.css';
+import { Link } from 'react-router-dom';
 import CopyButton from '../components/CopyButton';
 import FavoriteButton from '../components/FavoriteButton';
-import { Link } from 'react-router-dom';
 
 // www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
 export default function ProgressRecipeDrink({ match: { params: { id } } }) {

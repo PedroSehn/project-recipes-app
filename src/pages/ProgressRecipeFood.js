@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './ProgressRecipe.css';
+import { Link } from 'react-router-dom';
 import CopyButton from '../components/CopyButton';
 import FavoriteButton from '../components/FavoriteButton';
-import { Link } from 'react-router-dom';
 
 // www.themealdb.com/api/json/v1/1/lookup.php?i=52772
 export default function ProgressRecipeFood({ match: { params: { id } } }) {
   const [meal, setMeal] = useState({});
-  const [ingredientChecked, setIngredientChecked] = useState([]);
-  const [checks, setChecks] = useState([]);
-  const finishButton = document.getElementById('finish-recipe-btn');
+  // const [ingredientChecked, setIngredientChecked] = useState([]);
   useEffect(() => {
     async function getMeal() {
       const dish = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -22,9 +20,9 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
   }, [id]);
 
   // const loadRecipe = () => {
-    //   if (localStorage['inProgressRecipes']) {
-      //     const setDiv = document.querySelector('#current-recipe');
-      //     const divItemStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  //   if (localStorage['inProgressRecipes']) {
+  //     const setDiv = document.querySelector('#current-recipe');
+  //     const divItemStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   //     setDiv.innerHTML = divItemStorage;
   //   }
   // };
@@ -32,11 +30,9 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
   // window.onload = async function onload() {
   // };
   useEffect(() => {
-    const checks = document.getElementsByClassName('checkbox');
-    const finishButton = document.getElementById('finish-recipe-btn');
     finishButton.disabled = true;
   }, []);
-  
+
   const loadRecipe = () => {
     // if (localStorage['inProgressRecipes']) {
     //   const setDiv = document.querySelector('#current-recipe');
