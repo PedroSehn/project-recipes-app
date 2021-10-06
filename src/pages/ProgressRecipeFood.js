@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import './ProgressRecipe.css';
 import CopyButton from '../components/CopyButton';
 import FavoriteButton from '../components/FavoriteButton';
+import { Link } from 'react-router-dom';
+
 // www.themealdb.com/api/json/v1/1/lookup.php?i=52772
 export default function ProgressRecipeFood({ match: { params: { id } } }) {
   const [meal, setMeal] = useState({});
   const [ingredientChecked, setIngredientChecked] = useState([]);
+  const [checks, setChecks] = useState([]);
+  const finishButton = document.getElementById('finish-recipe-btn');
   useEffect(() => {
     async function getMeal() {
       const dish = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -26,9 +30,12 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
   // };
 
   // window.onload = async function onload() {
-  //   loadRecipe();
   // };
-
+  useEffect(() => {
+    const checks = document.getElementsByClassName('checkbox');
+    const finishButton = document.getElementById('finish-recipe-btn');
+    finishButton.disabled = true;
+  }, []);
   // useEffect(() => {
   //   if (localStorage[id]) {
   //     const element = JSON.parse(localStorage.getItem(id));
@@ -69,7 +76,7 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
   function checkIngredient({ target }) {
     target.nextSibling.className = target.checked
       ? 'checkedIngredient' : 'uncheckedIngredient';
-    console.log(target);
+    // finishButton.disabled = !checks.every((checkbox) => checkbox.checked);
   }
 
   return (
@@ -84,6 +91,15 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
       <h1 data-testid="recipe-title">{ meal.strMeal }</h1>
       <CopyButton typeUrl={ `comidas/${id}` } />
       <FavoriteButton />
+      <Link to="/receitas-feitas">
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          id="finish-recipe-btn"
+        >
+          Receita Finalizada
+        </button>
+      </Link>
       <p data-testid="recipe-category">{ meal.strCategory }</p>
       <div>
         {
@@ -114,7 +130,6 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
         }
       </div>
       <p data-testid="instructions" className="instructions">{ meal.strInstructions }</p>
-      <button type="button" data-testid="finish-recipe-btn">Receita Finalizada</button>
     </div>
   );
 }

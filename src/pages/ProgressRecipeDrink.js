@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import './ProgressRecipe.css';
 import CopyButton from '../components/CopyButton';
 import FavoriteButton from '../components/FavoriteButton';
+import { Link } from 'react-router-dom';
+
 // www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
 export default function ProgressRecipeDrink({ match: { params: { id } } }) {
   const [drink, setDrink] = useState({});
@@ -45,6 +47,15 @@ export default function ProgressRecipeDrink({ match: { params: { id } } }) {
       <h1 data-testid="recipe-title">{ drink.strDrink }</h1>
       <CopyButton typeUrl={ `bebidas/${id}` } />
       <FavoriteButton />
+      <Link to="/receitas-feitas">
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          id="finish-recipe-btn"
+        >
+          Receita Finalizada
+        </button>
+      </Link>
       <p data-testid="recipe-category">{ drink.strCategory }</p>
       <div>
         {
@@ -78,7 +89,6 @@ export default function ProgressRecipeDrink({ match: { params: { id } } }) {
         }
       </div>
       <p data-testid="instructions" className="instructions">{ drink.strInstructions }</p>
-      <button type="button" data-testid="finish-recipe-btn">Receita Finalizada</button>
     </div>
   );
 }
