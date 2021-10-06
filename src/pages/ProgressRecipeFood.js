@@ -4,8 +4,9 @@ import './ProgressRecipe.css';
 import CopyButton from '../components/CopyButton';
 import FavoriteButton from '../components/FavoriteButton';
 // www.themealdb.com/api/json/v1/1/lookup.php?i=52772
-export default function ProgressRecipeFood({ match: { params: { id }, url } }) {
+export default function ProgressRecipeFood({ match: { params: { id } } }) {
   const [meal, setMeal] = useState({});
+  const [ingredientChecked, setIngredientChecked] = useState([]);
   useEffect(() => {
     async function getMeal() {
       const dish = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -16,17 +17,17 @@ export default function ProgressRecipeFood({ match: { params: { id }, url } }) {
     getMeal();
   }, [id]);
 
-  const loadRecipe = () => {
-    // if (localStorage['inProgressRecipes']) {
-    //   const setDiv = document.querySelector('#current-recipe');
-    //   const divItemStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    //   setDiv.innerHTML = divItemStorage;
-    // }
-  };
+  // const loadRecipe = () => {
+    //   if (localStorage['inProgressRecipes']) {
+      //     const setDiv = document.querySelector('#current-recipe');
+      //     const divItemStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  //     setDiv.innerHTML = divItemStorage;
+  //   }
+  // };
 
-  window.onload = async function onload() {
-    loadRecipe();
-  };
+  // window.onload = async function onload() {
+  //   loadRecipe();
+  // };
 
   // useEffect(() => {
   //   if (localStorage[id]) {
@@ -38,7 +39,7 @@ export default function ProgressRecipeFood({ match: { params: { id }, url } }) {
 
   const MAX_INGREDIENTS = 20;
   const [numbers, ingredients,
-    measures] = [[], [], []]; /* Três arrays vazios */
+    measures, recipeIngredients] = [[], [], [], []]; /* Três arrays vazios */
   /* Numbers preenchido com números de 1 a 20 */
   for (let index = 0; index < MAX_INGREDIENTS; index += 1) {
     numbers.push(index + 1);
@@ -47,6 +48,18 @@ export default function ProgressRecipeFood({ match: { params: { id }, url } }) {
   /* strMeasures de 1 a 20. */
   numbers.forEach((num) => ingredients.push(`strIngredient${num}`));
   numbers.forEach((num) => measures.push(`strMeasure${num}`));
+  numbers.forEach((num) => (
+    recipeIngredients
+      .push(`${meal[measures[num - 1]]} ${meal[ingredients[num - 1]]}`)));
+
+  useEffect(() => {
+    function localStorageInProgress() {
+      localStorage.setItem('inProgressRecipes',
+        JSON.stringify({ meals: { [id]: recipeIngredients } }));
+    }
+
+    localStorageInProgress();
+  }, [recipeIngredients]);
 
   // function saveDiv() {
   //   const setDiv = document.querySelector('#current-recipe');
@@ -59,10 +72,6 @@ export default function ProgressRecipeFood({ match: { params: { id }, url } }) {
     console.log(target);
   }
 
-  function handleShare() {
-    global.alert('Link copiado!');
-  }
-
   return (
     <div id="current-recipe">
       <img
@@ -73,7 +82,7 @@ export default function ProgressRecipeFood({ match: { params: { id }, url } }) {
         alt="dish"
       />
       <h1 data-testid="recipe-title">{ meal.strMeal }</h1>
-      <CopyButton pathname={ `/comidas/${id}` } />
+      <CopyButton typeUrl={ `comidas/${id}` } />
       <FavoriteButton />
       <p data-testid="recipe-category">{ meal.strCategory }</p>
       <div>
@@ -96,7 +105,7 @@ export default function ProgressRecipeFood({ match: { params: { id }, url } }) {
                     onClick={ checkIngredient }
                   />
                   <span>
-                    { `${meal[measures[num - 1]]} ${meal[ingredients[num - 1]]}` }
+                    { recipeIngredients[num - 1] }
                   </span>
                 </label>
                 <br />

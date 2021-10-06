@@ -33,11 +33,6 @@ export default function ProgressRecipeDrink({ match: { params: { id } } }) {
       ? 'checkedIngredient' : 'uncheckedIngredient';
   }
 
-  function handleShare() {
-    global.alert('Link copiado!');
-    navigator.clipboard.writeText('');
-  }
-
   return (
     <div id="current-recipe">
       <img
@@ -48,13 +43,8 @@ export default function ProgressRecipeDrink({ match: { params: { id } } }) {
         alt="drink"
       />
       <h1 data-testid="recipe-title">{ drink.strDrink }</h1>
-      <CopyButton pathname={ `/bebidas/${id}` } />
-      <button
-        data-testid="favorite-btn"
-        type="button"
-      >
-        Adicionar aos Favoritos
-      </button>
+      <CopyButton typeUrl={ `bebidas/${id}` } />
+      <FavoriteButton />
       <p data-testid="recipe-category">{ drink.strCategory }</p>
       <div>
         {
