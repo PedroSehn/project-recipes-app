@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './ProgressRecipe.css';
+import CopyButton from '../components/CopyButton';
+import FaviriteButton from '../components/FavoriteButton';
 // www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
 export default function ProgressRecipeDrink({ match: { params: { id } } }) {
   const [drink, setDrink] = useState({});
@@ -46,13 +48,7 @@ export default function ProgressRecipeDrink({ match: { params: { id } } }) {
         alt="drink"
       />
       <h1 data-testid="recipe-title">{ drink.strDrink }</h1>
-      <button
-        data-testid="share-btn"
-        onClick={ handleShare }
-        type="button"
-      >
-        Compartilhar
-      </button>
+      <CopyButton pathname={ `/bebidas/${id}` } />
       <button
         data-testid="favorite-btn"
         type="button"

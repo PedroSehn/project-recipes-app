@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './ProgressRecipe.css';
+import CopyButton from '../components/CopyButton';
+import FaviriteButton from '../components/FavoriteButton';
 // www.themealdb.com/api/json/v1/1/lookup.php?i=52772
-export default function ProgressRecipeFood({ match: { params: { id } } }) {
+export default function ProgressRecipeFood({ match: { params: { id }, url } }) {
   const [meal, setMeal] = useState({});
   useEffect(() => {
     async function getMeal() {
@@ -70,13 +72,7 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
         alt="dish"
       />
       <h1 data-testid="recipe-title">{ meal.strMeal }</h1>
-      <button
-        data-testid="share-btn"
-        onClick={ handleShare }
-        type="button"
-      >
-        Compartilhar
-      </button>
+      <CopyButton pathname={ `/comidas/${id}` } />
       <button
         data-testid="favorite-btn"
         type="button"
