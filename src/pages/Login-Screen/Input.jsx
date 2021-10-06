@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-function Input({ type, name, id, onChange, value }) {
+function Input({ className, type, name, id, onChange, value }) {
   return (
     <label htmlFor={ id }>
       <input
+        className={ className }
         name={ name }
         type={ type }
         id={ id }
@@ -17,6 +18,7 @@ function Input({ type, name, id, onChange, value }) {
 }
 
 Input.propTypes = {
+  className: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

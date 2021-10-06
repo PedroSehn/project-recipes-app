@@ -1,0 +1,60 @@
+.buttonAll {
+  background: #c4c4c4;
+  border-radius: 4px;
+  height: 45px;
+  left: 15px;
+  margin: 10px;
+  top: 79px;
+  width: 102px;
+}
+
+.buttonFoods {
+  background: #c4c4c4;
+  border-radius: 4px;
+  height: 45px;
+  left: 129px;
+  margin: 10px;
+  top: 79px;
+  width: 102px;
+}
+
+.buttonDrinks {
+  background: #c4c4c4;
+  border-radius: 4px;
+  height: 45px;
+  left: 241px;
+  margin: 10px;
+  top: 79px;
+  width: 102px;
+}
+
+.filter {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  justify-content: center;
+  padding-left: 40px;
+  padding-top: 50px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #f8eded;
+  border-radius: 6px;
+  box-shadow: 4px 4px black;
+  box-sizing: border-box;
+  left: 15px;
+  margin-bottom: 15px;
+  margin-right: 20px;
+  top: 143px;
+}
+
+.itensList {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.image {
+  background-size: cover;
+}
