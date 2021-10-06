@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './ProgressRecipe.css';
 import CopyButton from '../components/CopyButton';
-import FaviriteButton from '../components/FavoriteButton';
+import FavoriteButton from '../components/FavoriteButton';
 // www.themealdb.com/api/json/v1/1/lookup.php?i=52772
 export default function ProgressRecipeFood({ match: { params: { id }, url } }) {
   const [meal, setMeal] = useState({});
@@ -56,6 +56,7 @@ export default function ProgressRecipeFood({ match: { params: { id }, url } }) {
   function checkIngredient({ target }) {
     target.nextSibling.className = target.checked
       ? 'checkedIngredient' : 'uncheckedIngredient';
+    console.log(target);
   }
 
   function handleShare() {
@@ -73,12 +74,7 @@ export default function ProgressRecipeFood({ match: { params: { id }, url } }) {
       />
       <h1 data-testid="recipe-title">{ meal.strMeal }</h1>
       <CopyButton pathname={ `/comidas/${id}` } />
-      <button
-        data-testid="favorite-btn"
-        type="button"
-      >
-        Adicionar aos Favoritos
-      </button>
+      <FavoriteButton />
       <p data-testid="recipe-category">{ meal.strCategory }</p>
       <div>
         {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './ProgressRecipe.css';
 import CopyButton from '../components/CopyButton';
-import FaviriteButton from '../components/FavoriteButton';
+import FavoriteButton from '../components/FavoriteButton';
 // www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
 export default function ProgressRecipeDrink({ match: { params: { id } } }) {
   const [drink, setDrink] = useState({});
