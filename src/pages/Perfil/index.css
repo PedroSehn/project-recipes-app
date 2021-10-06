@@ -8,39 +8,39 @@
   width: 329px;
 }
 
-.receitasFavoritas{
-  margin: 20px;
+.receitasFavoritas {
   background: #c4c4c4;
-  height: 53px;
-  width: 329px;
-  left: 16px;
-  top: 257px;
   border-radius: 4px;
+  height: 53px;
+  left: 16px;
+  margin: 20px;
+  top: 257px;
+  width: 329px;
 }
 
 .exit {
-  margin: 20px;
   background: #c4c4c4;
-  height: 53px;
-  width: 329px;
-  left: 16px;
-  top: 328px;
   border-radius: 4px;
+  height: 53px;
+  left: 16px;
+  margin: 20px;
+  top: 328px;
+  width: 329px;
 }
 
 .name {
-  padding-right: 450px;
-  margin: 20px;
-  height: 35px;
-  width: 225px;
-  left: 58px;
-  top: 111px;
   display: flex;
+  height: 35px;
+  left: 58px;
+  margin: 20px;
+  padding-right: 450px;
+  top: 111px;
+  width: 225px;
 }
 
-.main{
-  display: flex;
-  height: 100%;
+.main {
   align-items: center;
+  display: flex;
   flex-direction: column;
+  height: 100%;
 }
