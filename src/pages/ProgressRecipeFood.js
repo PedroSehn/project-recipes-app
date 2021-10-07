@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './ProgressRecipe.css';
 // www.themealdb.com/api/json/v1/1/lookup.php?i=52772
@@ -83,6 +84,14 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
       >
         Adicionar aos Favoritos
       </button>
+      <Link to="/receitas-feitas">
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+        >
+          Receita Finalizada
+        </button>
+      </Link>
       <p data-testid="recipe-category">{ meal.strCategory }</p>
       <div>
         {
@@ -113,7 +122,6 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
         }
       </div>
       <p data-testid="instructions" className="instructions">{ meal.strInstructions }</p>
-      <button type="button" data-testid="finish-recipe-btn">Receita Finalizada</button>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './ProgressRecipe.css';
 // www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
@@ -59,6 +60,15 @@ export default function ProgressRecipeDrink({ match: { params: { id } } }) {
       >
         Adicionar aos Favoritos
       </button>
+      <Link to="/receitas-feitas">
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          id="finish-recipe-btn"
+        >
+          Receita Finalizada
+        </button>
+      </Link>
       <p data-testid="recipe-category">{ drink.strCategory }</p>
       <div>
         {
@@ -92,7 +102,6 @@ export default function ProgressRecipeDrink({ match: { params: { id } } }) {
         }
       </div>
       <p data-testid="instructions" className="instructions">{ drink.strInstructions }</p>
-      <button type="button" data-testid="finish-recipe-btn">Receita Finalizada</button>
     </div>
   );
 }
