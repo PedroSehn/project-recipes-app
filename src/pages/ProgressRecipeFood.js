@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import CopyButton from '../components/CopyButton';
+import FavoriteButton from '../components/FavoriteButton';
 import './ProgressRecipe.css';
 // www.themealdb.com/api/json/v1/1/lookup.php?i=52772
 export default function ProgressRecipeFood({ match: { params: { id } } }) {
@@ -57,10 +59,6 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
       ? 'checkedIngredient' : 'uncheckedIngredient';
   }
 
-  function handleShare() {
-    global.alert('Link copiado!');
-  }
-
   return (
     <div id="current-recipe">
       <img
@@ -71,19 +69,8 @@ export default function ProgressRecipeFood({ match: { params: { id } } }) {
         alt="dish"
       />
       <h1 data-testid="recipe-title">{ meal.strMeal }</h1>
-      <button
-        data-testid="share-btn"
-        onClick={ handleShare }
-        type="button"
-      >
-        Compartilhar
-      </button>
-      <button
-        data-testid="favorite-btn"
-        type="button"
-      >
-        Adicionar aos Favoritos
-      </button>
+      <CopyButton typeUrl={ `comidas/${id}` } />
+      <FavoriteButton />
       <Link to="/receitas-feitas">
         <button
           type="button"

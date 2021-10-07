@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import CopyButton from '../components/CopyButton';
+import FavoriteButton from '../components/FavoriteButton';
 import './ProgressRecipe.css';
 // www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007
 export default function ProgressRecipeDrink({ match: { params: { id } } }) {
@@ -32,11 +34,6 @@ export default function ProgressRecipeDrink({ match: { params: { id } } }) {
       ? 'checkedIngredient' : 'uncheckedIngredient';
   }
 
-  function handleShare() {
-    global.alert('Link copiado!');
-    navigator.clipboard.writeText('');
-  }
-
   return (
     <div id="current-recipe">
       <img
@@ -47,19 +44,8 @@ export default function ProgressRecipeDrink({ match: { params: { id } } }) {
         alt="drink"
       />
       <h1 data-testid="recipe-title">{ drink.strDrink }</h1>
-      <button
-        data-testid="share-btn"
-        onClick={ handleShare }
-        type="button"
-      >
-        Compartilhar
-      </button>
-      <button
-        data-testid="favorite-btn"
-        type="button"
-      >
-        Adicionar aos Favoritos
-      </button>
+      <CopyButton typeUrl={ `bebidas/${id}` } />
+      <FavoriteButton />
       <Link to="/receitas-feitas">
         <button
           type="button"
