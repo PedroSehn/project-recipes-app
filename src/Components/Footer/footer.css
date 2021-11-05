@@ -1,0 +1,17 @@
+.footer {
+  align-content: center;
+  align-items: stretch;
+  background-color: #efefef;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  height: 10%;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+}
+
+.footer button {
+  border: none;
+  width: 33%;
+}
